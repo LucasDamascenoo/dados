@@ -40,7 +40,7 @@ entrada = float(input("digite o valor")) #convertemos string para float
 
 ## F'strings
 
-Com f'strings podemos vacilitar a concatenação de variaveis e arredendodamento de casas decimais
+Com f'strings podemos facilitar a concatenação de variaveis e arredendodamento de casas decimais
 
 ```{python}
 
@@ -56,7 +56,7 @@ O que aprendemos hoje?
 
 ## Estrutura condicional
 
-Estrutura condicional nos permite criar blocos de códigos atráves de certas condição, se for verdadeiro faça isso, se for falso faça aquilo.
+Estrutura condicional nos permite criar blocos de códigos atráves de certas condições, se for verdadeiro faça isso, se for falso faça aquilo.
 
 ```{python}
 
@@ -103,3 +103,46 @@ Os operadores condições nos ajuda na criação de condições (preposições).
 - AND : todas as condições passadas precisam ser verdadeira para retornar True
 - OR : apenas umas das condições passadas precisam ser verdadeira pra retornar True
 - NOT: inverte a operação se for True > False e se for False > True
+
+# Day04
+
+## Random
+
+Podemos gerar números de forma "aleatoria" que por trás dos pano usa o algoritmo Mersenne Twister.
+
+```{python}
+
+import random #primeiro precisamos importar o módulo random
+
+aleatorio = random.randint(1,10) # gere um numerod entre 1 e 10
+
+
+```
+
+## Listas
+
+Lista é uma estrutura de dados capaz de armazenar uma lista de dados organizada.
+
+```{python}
+
+
+frutas = ['Maça','Banana','Uva'] #lista de frutas
+
+
+```
+
+### Indices
+
+Quando criamos uma lista, os valores guardados dentro dela, pode ser acessada por seus indices (em linguagem de programação começa com 0)
+
+```{python}
+
+
+frutas = ['Maça','Banana','Uva'] #lista de frutas
+
+frutas[0] Maça
+frutas[1] Banana
+frutas[3] Uva
+frutas[10] IndentationError: unexpected indent
+
+```

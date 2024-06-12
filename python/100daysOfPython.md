@@ -146,3 +146,35 @@ frutas[3] Uva
 frutas[10] IndentationError: unexpected indent
 
 ```
+
+# Day05
+
+## Loops
+
+Podemos rodar um determinado bloco de códigos "inumeras" vezes de acordo com seu tamanho por exemplo, e para isso usamos loops
+
+### For
+
+For é bastante utilizado principalmente para trabalhar com listas, vamos a alguns exemplos:
+
+```{python}
+
+
+animals = ['cat', 'window', 'defenestrate']
+
+
+for animal in animals:
+  print(animal)
+
+
+```
+
+1 - primeiro criamos uma variavel que vai receber o valor cada vez que o loop rodar (animal)
+
+2 - declaramos o que vamos iterar : lista animals
+
+3 - printamos a variavel que criamos no primeiro passo
+
+#cat
+#window
+#defenestrate

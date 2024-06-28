@@ -1,10 +1,20 @@
-
 # SQL - Sequel
+
+## Conceitos
+
+### Normalização
+
+Normalizamos tabela para que os dados sejam lidos e gravados de forma mais clara, ao invez de termos um unico tabelão de vendas, podemos dividir em diversas tabela, como produtos, vendedores, vendas, cliente.
+
+### Chave Primaria e Chave Estrangeira
+
+- Chave Primaria: Chave primaria identificar um registro unico em uma tabela (ID,CPF,NSU)
+- Chave Estrangeira: Chave primaria de uma tabela que foi adicionado em outra tabela.
 
 
 ## Consultas (Querys)
 
-O objetivo das consultas é retornar dados de uma determinada tabela, para isso usamos o SELECT.
+O objetivo das consultas é retornar dados de uma determinada tabela/view, para isso usamos o SELECT.
 
 - Selecionando todas as colunas
 
@@ -167,7 +177,7 @@ where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apen
 ```
 
 ### Order By
-Responsavel por orderna uma ou mais colunas
+Responsavel por ordernar uma ou mais colunas
 
 ```sql 
 select 
@@ -176,6 +186,8 @@ from needful_things.orders
 order by salario -- vai order o resultado pelos salarios (menor para o maior)
 order by salario DESC -- orderna do maior para o menor
 ```
+**Em casos númericos sempre vai ser do maior para o menor ou do menor para o maior**
+**Em casos de textos, vai respeitar a ordem alfabetica**
 
 ### Limit
 
@@ -187,3 +199,15 @@ select
 from needful_things.orders
 LIMIT 5;
 ```
+
+### Group By
+
+Group by é responsavel por agrupar campos que possuam
+
+## Manipulações
+
+
+### Format
+
+
+### Convert

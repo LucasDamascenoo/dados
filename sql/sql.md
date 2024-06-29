@@ -1,5 +1,6 @@
 # SQL - Sequel
 
+Documentando meus estudos e projetos em SQL.
 
 
 ## Conceitos
@@ -197,18 +198,56 @@ Group by é responsavel por agrupar campos que possuem agregações(min,max...)
 
 **Não podemos selecionar o campo de que está fazendo a operação de agregação**
 
-
-
+```sql 
+SELECT
+CIDADE,
+COUNT(ID_FUNC) AS QTD_FUNCIONARIO
+FROM FUNCIONARIOS
+GROUP BY CIDADE
+```
 
 ### Where vs Having
 
-- Where é usado para filtrar dados individual
+- Where é usado para filtrar colunas(aritmeticas e demais) de forma individual
+**Não podemos usar funções de agregações em um where, isso se da por conta da ordem de execução do sql (where vem antes do groupby)**
 
-- Having somente é usando com as operações de uma agregação
+- Having somente é usando com as operações de uma agregação (min,max...)
 
+```sql 
+SELECT
+CIDADE,
+COUNT(ID_FUNC) AS QTD_FUNCIONARIO
+FROM FUNCIONARIOS
+GROUP BY CIDADE
+HAVING COUNT(ID_FUNC) > 1 -- NESSES EXEMPLOS PODEMOS VERIFICAR SE EXISTE DUPLICIDADE DE IDS
+```
+
+**Podemos combinar Where com Having**
+
+```sql 
+SELECT
+NUMERO,
+QUANTIDADE,
+ROUND(SUM(PRECO),2) AS PRECO
+FROM [dbo].[ITENS_NOTAS_FISCAIS]
+WHERE CODIGO_DO_PRODUTO IN (723457,1078680,290478,1004327)
+GROUP BY
+NUMERO,
+QUANTIDADE
+HAVING SUM(PRECO) > 2
+```
 
 ### Ordem de execução
 
+Essa é a ordem de execução em uma query sql.
+
+1º FROM 
+2º WHERE 
+3º GROUP BY
+4º HAVING
+5º SELECT
+6º ORDER BY
+7º LIMIT
 
 ### Limit
 
@@ -220,7 +259,6 @@ select
 from needful_things.orders
 LIMIT 5;
 ```
-
 
 
 ## Manipulações

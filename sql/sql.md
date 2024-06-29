@@ -1,5 +1,7 @@
 # SQL - Sequel
 
+
+
 ## Conceitos
 
 ### Normalização
@@ -189,6 +191,25 @@ order by salario DESC -- orderna do maior para o menor
 **Em casos númericos sempre vai ser do maior para o menor ou do menor para o maior**
 **Em casos de textos, vai respeitar a ordem alfabetica**
 
+### Group By
+
+Group by é responsavel por agrupar campos que possuem agregações(min,max...)
+
+**Não podemos selecionar o campo de que está fazendo a operação de agregação**
+
+
+
+
+### Where vs Having
+
+- Where é usado para filtrar dados individual
+
+- Having somente é usando com as operações de uma agregação
+
+
+### Ordem de execução
+
+
 ### Limit
 
 Limita a quantidade de registros em uma consulta SQL.
@@ -200,9 +221,7 @@ from needful_things.orders
 LIMIT 5;
 ```
 
-### Group By
 
-Group by é responsavel por agrupar campos que possuam
 
 ## Manipulações
 
@@ -211,3 +230,5 @@ Group by é responsavel por agrupar campos que possuam
 
 
 ### Convert
+
+### Cast

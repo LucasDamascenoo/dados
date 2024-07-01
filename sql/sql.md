@@ -114,6 +114,7 @@ from needful_things.orders
 where products  in ('pa','ra','dh') or cidade in ('sp','rj','ba') -- vai retornar dados apenas se uma das condições forem verdade
 ```
 
+
 ## Aliases
 
 Podemos criar 'apelidos' tanto em colunas quanto em tabelas utilizando o AS
@@ -192,6 +193,16 @@ order by salario DESC -- orderna do maior para o menor
 **Em casos númericos sempre vai ser do maior para o menor ou do menor para o maior**
 **Em casos de textos, vai respeitar a ordem alfabetica**
 
+```sql 
+select 
+nome,
+idade,
+sexo
+from needful_things.orders
+order by 1 -- vai ordernar pela primeiro campo do select ( no caso o nome)
+
+```
+
 ### Group By
 
 Group by é responsavel por agrupar campos que possuem agregações(min,max...)
@@ -260,6 +271,46 @@ from needful_things.orders
 LIMIT 5;
 ```
 
+## Distinc
+
+retorna valores distintos de uma determinada coluna.
+
+```sql 
+SELECT DISTINCT * FROM tb_products;
+```
+
+## Is Null e Is Not Null
+
+- Is null é usado para verificar quando uma coluna tem valores nulos(vai retornar somente null)
+
+```sql 
+SELECT DISTINCT produtos FROM tb_products
+where produtos is null;
+```
+
+- IS Not null é usadado para verificar quando não queremos trazer nulos
+```sql 
+SELECT DISTINCT produtos FROM tb_products
+where produtos is not null;
+```
+## Case
+
+Case é usado para criar uma estrutura lógico (como um if em outras linguagens)
+
+```sql 
+
+SELECT
+PRODUTO,
+PRECO,
+CASE 
+WHEN VALOR >50 AND VALOR <= 100 VALOR THEN 'BARATO'
+WHEN VALOR > 100 THEN 'CARO'
+ELSE VALOR END AS 'CATEGORIA_PRECO'
+FROM VENDAS
+
+```
+
+## Coalese
 
 ## Manipulações
 

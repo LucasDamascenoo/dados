@@ -312,6 +312,12 @@ FROM VENDAS
 
 ## Coalese
 
+## Joins
+
+Jois é o relacionamento entre tabela, como podemos ligar uma na outra atraves de chaves e campos relacionados.
+
+![joins](/img/joins.png)
+
 ## Manipulações
 
 

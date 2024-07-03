@@ -260,7 +260,7 @@ Essa é a ordem de execução em uma query sql.
 6º ORDER BY
 7º LIMIT
 
-### Limit
+## Limit
 
 Limita a quantidade de registros em uma consulta SQL.
 
@@ -314,9 +314,22 @@ FROM VENDAS
 
 ## Joins
 
-Jois é o relacionamento entre tabela, como podemos ligar uma na outra atraves de chaves e campos relacionados.
+Jois é o relacionamento entre tabela, como podemos ligar e trazer dados de uma na outra atraves de chaves e campos relacionados.
 
-![joins](/img/joins.png)
+![joins](/dados/img/joins.png)
+
+### Left Join
+
+- mantem todos os dados da esquerda (tabela do from) e vamos tentar encontrar o que tem na direita
+
+
+### Right Join
+
+ - mantem todos os dados da direta (tabela do join) e vamos tentar encontrar o que tem na direita(tabela do from)
+
+### Inner Join
+
+- Trazem os dados que correspodem as duas tabelas
 
 ## Manipulações
 

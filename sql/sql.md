@@ -318,18 +318,29 @@ Jois é o relacionamento entre tabela, como podemos ligar e trazer dados de uma 
 
 ![joins](/dados/img/joins.png)
 
+### Inner Join/Join
+
+- é o join padrão do sql(podendo ser usado inner join ou somente join)
+- Trazem os dados que correspodem as duas tabelas, tudo que as chaves não batam não vai trazer, tanto na tabela do from quanto da tabela do join.
+
+
 ### Left Join
 
 - mantem todos os dados da esquerda (tabela do from) e vamos tentar encontrar o que tem na direita
+- tudo que não tenha correspondencia vai trazer como Null(vazio)
 
 
 ### Right Join
 
  - mantem todos os dados da direta (tabela do join) e vamos tentar encontrar o que tem na direita(tabela do from)
+ - tudo que não tenha correspondencia vai trazer null
 
-### Inner Join
 
-- Trazem os dados que correspodem as duas tabelas
+### Full Join
+
+- Tras todos dos dados de ambas as tabela
+- o que não tem correspondencia vai trazer como Null(Vazio)
+
 
 ## Manipulações
 

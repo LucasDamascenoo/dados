@@ -312,6 +312,25 @@ FROM VENDAS
 
 ## Coalese
 
+- Transforma um valor nulo em valor padrão
+- forma mais elegante de trabalharmos com nulos
+
+```sql 
+
+SELECT * FROM STATION_DATA
+WHERE coalesce(precipitation,0) =< 0.5; --usado no where
+
+```
+
+**caso a coluna precipitation tenha dados nulo, setamos o 0 para essas linhas**
+
+```sql 
+
+SELECT report_code, coalesce(precipation,'n/a') FROM STATION_DATA
+
+```
+**caso o campo precipitation seja nulo, setamos o 'n/a' para essas linhas**
+
 ## Joins
 
 Jois é o relacionamento entre tabela, como podemos ligar e trazer dados de uma na outra atraves de chaves e campos relacionados.

@@ -360,6 +360,76 @@ Jois é o relacionamento entre tabela, como podemos ligar e trazer dados de uma 
 - Tras todos dos dados de ambas as tabela
 - o que não tem correspondencia vai trazer como Null(Vazio)
 
+### Union
+
+
+Podemos unir duas ou mais tabelas utilizando UNION.
+- Union aplica o distinct no retorno dos dados
+
+- temos que ter o mesmo numero de campos (e os tipos devem ser iguais) em ambas consultas
+
+- os nomes das colunas são representados pela primeira consulta
+
+```sql 
+
+SELECT DISTINCT BAIRRO FROM TABELA_DE_CLIENTES
+union
+SELECT DISTINCT BAIRRO FROM TABELA_DE_VENDEDORES
+
+```
+**NO CASO ACIMA ESTAMOS UNINDO DUAS TABELAS ONDE TEM BAIRROS EM COMUM,TRAZENDO SOMENTE UM BAIRRO A + QUE NAO EXISTIA NA TABELA DE CLIENTES**
+
+
+### Union All
+
+Podemos unir duas ou mais tabelas utilizando UNION ALL.
+- Union NÃO aplica o distinct no retorno dos dados, ou seja vai trazer todos os dados correspondente nas tabelas
+
+- temos que ter o mesmo numero de campos (e os tipos devem ser iguais) em ambas consultas
+
+- os nomes das colunas são representados pela primeira consulta
+
+
+## Subqueries
+
+O que são subqueries? 
+
+- Subqueries(subconsultas) são queries dentro de outras, o entendimento é facil, o mais complicado é como aplicar isso:
+
+- O resultado de uma subquerie é uma nova tabela
+
+- É possivel usar subquery em um where(= / in), em um outro join
+
+```sql 
+
+SELECT * FROM MOVIMENTO
+WHERE IN (
+  SELECT CLIENTE * FROM CLIENTES WHERE NUM_FUNC = 10
+)
+
+```
+
+**USANDO COMO OUTRA TABELA**
+
+```sql 
+select * from (
+SELECT
+CODIGO_DO_PRODUTO,
+SUM(QUANTIDADE) AS RESUMO_QTD
+FROM [dbo].[ITENS_NOTAS_FISCAIS]
+GROUP BY CODIGO_DO_PRODUTO ) as teste
+where teste.CODIGO_DO_PRODUTO = 394479
+
+```
+
+**USANDO DENTRO DO IN**
+**SÓ PODEMOS USAR UMA SUBQUERY NO IN COM APENAS UM CAMPO**
+```sql 
+SELECT * FROM TABELA_DE_CLIENTES
+WHERE BAIRRO IN (SELECT DISTINCT BAIRRO FROM TABELA_DE_VENDEDORES)
+
+```
+
 
 ## Manipulações
 

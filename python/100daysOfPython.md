@@ -178,3 +178,20 @@ for animal in animals:
 #cat
 #window
 #defenestrate
+
+
+# Day06
+
+## List Comprehesion
+
+- Podemos gerar listas de forma "automatica" atraves do list comprehension
+
+
+```Python:
+
+list1 = [1,2,3,4,5]
+
+listComp = [x**2 for x in list1] ## aqui vamos gerar uma lista do dobro de uma lista dado anteriormente.
+
+
+```

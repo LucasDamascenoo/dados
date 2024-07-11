@@ -103,7 +103,7 @@ Os operadores condições nos ajuda na criação de condições (preposições).
 - AND : todas as condições passadas precisam ser verdadeira para retornar True
 - OR : apenas umas das condições passadas precisam ser verdadeira pra retornar True
 - NOT: inverte a operação se for True > False e se for False > True
-
+- IN: Verifica um determinado valor, caso exista True, caso não False
 # Day04
 
 ## Random
@@ -124,11 +124,7 @@ aleatorio = random.randint(1,10) # gere um numerod entre 1 e 10
 Lista é uma estrutura de dados capaz de armazenar uma lista de dados organizada.
 
 ```{python}
-
-
 frutas = ['Maça','Banana','Uva'] #lista de frutas
-
-
 ```
 
 ### Indices
@@ -147,6 +143,61 @@ frutas[10] IndentationError: unexpected indent
 
 ```
 
+### Metodos de listas
+
+- len() : Ve a qtd de elementos em uma lista
+- append(): add um valor no fim da lista
+- extend() - add varios elementos no fim da lista
+
+
+## Dicionarios
+
+São um conjunto de dados que contem chaves e valores:
+
+
+```{python}
+aluno = {"matricula": 101010101,
+         "dia_cadastro": 25,
+         "mes": 10,
+         "turma": "2e"}
+```
+
+**acessando o valor de uma determinada chave**
+```{python}
+print(aluno["matricula"])
+```
+
+**alterando o valor de uma determinada chave**
+```{python}
+
+aluno["turma"] = "3f"
+```
+
+**adicionando uma nova chave valor**
+
+```{python}
+
+aluno["modalidade"] = "Presencial"
+
+```
+
+### Listas em dicionarios
+
+```{python}
+
+loja = {'nomes': ['televisão', 'celular', 'notebook', 'geladeira', 'fogão'],
+        'precos': [2000, 1500, 3500, 4000, 1500]}
+
+```
+
+### Metodos de dicionarios
+
+- pop(): remove a chave/valor de um dicionario
+- items(): retorna uma lista dos pares(chave e valor)
+- keys(): retorna todas as chaves do dicionario
+- values(): retorna todos os valores de um dicionario
+
+
 # Day05
 
 ## Loops
@@ -157,16 +208,20 @@ Podemos rodar um determinado bloco de códigos "inumeras" vezes de acordo com se
 
 For é bastante utilizado principalmente para trabalhar com listas, vamos a alguns exemplos:
 
+- Utilizado para iterar um conjunto de dados
+
+**Sintax**
 ```{python}
+for elemento in conjunto: 
 
-
+  #elemento sera repetido(individualmente) até o fim do conjunto
+```
+**Exemplo**
+```{python}
 animals = ['cat', 'window', 'defenestrate']
-
 
 for animal in animals:
   print(animal)
-
-
 ```
 
 1 - primeiro criamos uma variavel que vai receber o valor cada vez que o loop rodar (animal)
@@ -178,6 +233,46 @@ for animal in animals:
 #cat
 #window
 #defenestrate
+
+
+### For + Range
+
+- podemos utilizar o for em conjunto com o range(cria valores) de acordo com um limite(range) passado
+
+```{python}
+for e in range(1, 11):
+    print(e)
+```
+
+### While
+
+- While é utilizado para repetir um determinado código enquanto uma certa condição for verdadeira
+
+**Sintax**
+```{python}
+while condição:
+  #faça isso
+```
+
+**Exemplo**
+
+```{python}
+contador =  1
+while contador <=10:
+  print(contador)
+  contador+=1
+```
+**Exemplo pratico**
+
+```{python}
+contador = 1
+
+while contador <= 3:
+    n1 = float(input("Digite sua primeira nota: "))
+    n2 = float(input("Digite sua segunda nota: "))
+    print(f'Média: {(n1+n2)/2}')
+    contador += 1
+```
 
 
 # Day06

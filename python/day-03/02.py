@@ -1,4 +1,4 @@
-## estrutura condicional
+# estrutura condicional
 
 # idade = int(input("Qual a sua idade? "))
 
@@ -6,22 +6,28 @@
 #   print("pode entrar")
 # else:
 #   print("Não pode entrar")
-  
-  
-
-## estrura condicional alinhada
-
-altura = int(input("Digite sua altura "))
 
 
-if altura >=170:
-  print("Pode entrar")
-  age = int(input("Qual a sua idade? "))
-  if age <= 18:
-    print("valor do ticket é $15")
-  else:
-    print("valor do ticket é $20")
+# estrura condicional alinhada
+
+# altura = int(input("Digite sua altura "))
+
+
+# if altura >= 170:
+#     print("Pode entrar")
+#     age = int(input("Qual a sua idade? "))
+#     if age <= 18:
+#         print("valor do ticket é $15")
+#     else:
+#         print("valor do ticket é $20")
+# else:
+#     print(" Não pode entrar")
+
+
+lista = ['Lucas', 'Bruce', 'Tati']
+
+
+if lista["Bruce"] in lista:
+    print("Bruce was were")
 else:
-  print(" Não pode entrar")
-  
-
+    print("Bruce not here")

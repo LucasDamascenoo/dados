@@ -7,16 +7,15 @@ Pandas é uma biblioteca do Python utilizado para analise e tratamento de dados.
 # Series e Dataframes
 
 
+: 
 
 
 # Métodos de Dataframe
 
-dados.info():
-dados.shape():
-dados.head(): 
-
-
-## GroupBy
+## info()
+## shape()
+## head()
+## GroupBy()
 
 - Permite agrupar uma determinada serie/coluna de um dataframe, assimo como no sql tambem precisamos de um função de agregação (sum,mean(média))
 
@@ -43,5 +42,44 @@ C            10
 ```
 
 
+## Query()
+
+Com o query podemos selecionar dados em um dataframe atraves de uma condição, semelhante ao SQL.
+
+**filtros sem query**
+
+```{python}
+df[df['nota']>= 6]
+```
+
+**Filtro por valor**
+```{python}
+
+df.query('NSU == 10101010')
+```
+
+**Filtro por valor + selecionando colunas especificas**
+
+```{python}
+
+df.query('rating > 100')[['name','rating']] 
+```
+
+**Filtro por uma determinada variavel**
+```{python}
+
+nsus = [101010,101020,1010130,50505050]
+df.query['@nsus in NSU']  #USAMOS A VARIAVEL nsus(lista) para filtrar dados do campo Nsu
+```
+
+## Value Counts()
+
+
+## Rename(columns)
+
+
+## Unique e Nunique()
+
+- diferença entre ambos
 
 

@@ -277,6 +277,47 @@ while contador <= 3:
 
 # Day06
 
+## Funções
+
+Funções é um bloco de código que executa um subprograma que pode ser reutilizavel em diversas partes dos nossos códigos.
+
+
+
+### Elemento essenciais de uma função
+
+1. "def": define a função
+2. "soma": toda função precisa de um nome
+3. "argumentos": são as variaveis internas da nossa função(opcional)
+4. "processamento" : é o que incluimos dentro da função, sera o executavel da nossa função
+5. "return": 
+
+### Divisão de uma função
+
+uma função basicamente é divida em duas partes, cabeçalho e corpo da função, onde o cabeçalho é o que chamamos e o corpo é o executavel
+
+- Cabeçalho 
+
+```Python:
+
+def extract_audio (video_file:str, output_file: str, eq:bool = True) 
+=> Path | tuple[Path...]:
+
+```
+
+1. **Nomes**: como nomeamos nossas funções
+- Não podem iniciar com numeros e caracteries especieis(exeto o _)
+- letras minusculas
+- devemos usar snake_case
+
+2. **Parametros**: Parametros são "variaveis" internas de uma função
+- Temos diversos tipos de parametros, como o posicial (de acordo com a ordem definida) e chaves chave-valor (x=1,y=2)
+
+3. **Anotação de parametros**: a partir do py 3.5 podemos definir tipos pros nossos parametros (valor:float,taxa:float)
+
+
+
+
+
 ## List Comprehesion
 
 - Podemos gerar listas de forma "automatica" atraves do list comprehension

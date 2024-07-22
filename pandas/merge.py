@@ -1,32 +1,35 @@
 # %%
 import pandas as pd
+import os
 # %%
 
 df1 = pd.DataFrame({
     'chave': ['A', 'B', 'C'],
-    'valor': [1, 2, 3]
+    'valor': [1, 2, 3],
+    'data': ['01/01/2024','02/01/2024','03/01/2024']
 })
 
 df2 = pd.DataFrame({
-    'chave': ['A', 'B', 'D'],
-    'valor': [4, 5, 6]
+    'nsu': ['A', 'B', 'D'],
+    'valor_nsu': [4, 5, 6]
 })
 # %%
 unificado = pd.merge(df1, df2, on='chave', how='outer',
                      suffixes=('_esquerda', '_direita'))
 # %%
+unificado = pd.concat([df1,df2]).reset_index()
+unificado
+# %%
+dados = []
+
+for arquivos in os.listdir(r'C:\Users\fb.11129\OneDrive - Elo Participações LTDA\Área de Trabalho\dsfs'):
+    df = pd.read_excel(arquivos)
+    dados.append(df)
+
+concatenado = pd.concat(dados,ignore_index=True)
 
 # %%
 
-
 # %%
-
-# %%
-
-chave	valor_esquerda	valor_direita
-0	A	1.0	4.0
-1	B	2.0	5.0
-2	C	3.0	NaN
-3	D	NaN	6.0
 
 # %%

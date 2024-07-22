@@ -1,7 +1,7 @@
 
 # Pandas
 
-Pandas é uma biblioteca do Python utilizado para analise e tratamento de dados.
+Pandas é uma biblioteca do Python utilizado para analises e tratamento de dados.
 
 
 # Series e Dataframes
@@ -12,9 +12,25 @@ Pandas é uma biblioteca do Python utilizado para analise e tratamento de dados.
 
 # Métodos de Dataframe
 
+## head() - tail ()
+
+- Com o df.head() somos capazes de ter um exemplo das 5 primeiras linhas do nosso dataframe, podemos comparar como o top ou limit do SQL.
+- Já o df.tail() somos capazes de ter um exemplo das 5 ultimas linhas do nosso datagrame.
+
 ## info()
+
+Com o df.info() conseguimos identifcar caracteriscas do nosso dataframe, como as colunas , seus tipos de dados, se os campos são nulos ou não.
+
 ## shape()
-## head()
+
+df.shape nos retorna a quantidade de colunas e linhas do nosso dataframe
+
+## Value Counts()
+
+ Value counts é responsavel por "contar" valores unicos em nosso dataframe:
+
+
+
 ## GroupBy()
 
 - Permite agrupar uma determinada serie/coluna de um dataframe, assimo como no sql tambem precisamos de um função de agregação (sum,mean(média))
@@ -24,8 +40,6 @@ Pandas é uma biblioteca do Python utilizado para analise e tratamento de dados.
 ```{python}
 
 groupby('Animal').sum(numeric_Only=True) #usamos esse parametro no sum caso não especificarmos uma coluna numerica
-
-
 
 ```
 
@@ -142,11 +156,77 @@ chave	valor_esquerda	valor_direita
 ```
 
 
+## Concat
+
+Com o pd.Concat() podemos unir dois ou mais dataframes, esse método nos permite unidicar dfs sejam por linhas (um abaixo do outro) ou por colunas (um ao lado do outro)
+
+- **Eixos:** Podemos concatenar nossos dataframes em dois eixos, horizontal axis=1 (colunas) e vertical axis=0 (linhas)
 
 
-## Value Counts()
+```{python}
+df1 = pd.DataFrame({
+    'chave': ['A', 'B', 'C'],
+    'valor': [1, 2, 3],
+    'data': ['01/01/2024','02/01/2024','03/01/2024']
+})
+
+df2 = pd.DataFrame({
+    'chave': ['A', 'B', 'D'],
+    'valor': [4, 5, 6]
+})
+
+unificado = pd.concat([df1,df2]).reset_index()
+
+# retorno 
+
+index	chave	valor	data
+0	0	A	1	01/01/2024
+1	1	B	2	02/01/2024
+2	2	C	3	03/01/2024
+3	0	A	4	NaN
+4	1	B	5	NaN
+5	2	D	6	NaN
+
+```
+
+- No processo acima unificamos dois dataframes que possuem a mesma estrutura de nomes, no caso um fico abaixo do outro, no df2 não tem informação de data e vem como NaN.
+
+- Reset_index() foi usado para que os indexes sejam feito do "zero" pois sem isso, cada df terá seu index
 
 
+**Exemplo onde as colunas não são a mesma**
+
+```{python}
+df1 = pd.DataFrame({
+    'chave': ['A', 'B', 'C'],
+    'valor': [1, 2, 3],
+    'data': ['01/01/2024','02/01/2024','03/01/2024']
+})
+
+df2 = pd.DataFrame({
+    'nsu': ['A', 'B', 'D'],
+    'valor_nsu': [4, 5, 6]
+})
+
+unificado = pd.concat([df1,df2]).reset_index()
+
+# retorno 
+
+index	chave valor	data	nsu	valor_nsu
+0	0	A	1.0	01/01/2024	NaN	NaN
+1	1	B	2.0	02/01/2024	NaN	NaN
+2	2	C	3.0	03/01/2024	NaN	NaN
+3	0	NaN	NaN	NaN	A	4.0
+4	1	NaN	NaN	NaN	B	5.0
+5	2	NaN	NaN	NaN	D	6.0
+
+```
+
+- No Exemplo acima, como podemos notar os campos dos dfs não são o mesmo, então ele concatenou na forma de colunas (um ao lado do outro)
+
+
+
+Quando concatenamos temos a possibilidade de 
 ## Rename(columns)
 
 

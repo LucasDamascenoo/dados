@@ -3,14 +3,43 @@
 
 Pandas é uma biblioteca do Python utilizado para analises e tratamento de dados.
 
-
 # Series e Dataframes
 
+As principais estruturas de dados do Pandas são as Series e os Dataframes.
 
-: 
+## Series
+
+Uma Series é uma estrutura unidimensional que pode armazenar dados de qualquer tipo. Ela é semelhante a uma coluna em uma planilha ou a um vetor em programação. Cada elemento em uma Series é associado a um rótulo, chamado de índice.
+
+Exemplo de criação de uma Series:
+
+```python
+import pandas as pd
+
+s = pd.Series([1, 3, 5, np.nan, 6, 8])
+```
+
+## Dataframes
+
+Um DataFrame é uma estrutura bidimensional que pode armazenar dados de diferentes tipos. Ele é semelhante a uma planilha ou a uma tabela de banco de dados, onde cada coluna representa uma variável e cada linha representa uma observação.
+
+Exemplo de criação de um DataFrame:
+
+```python
+import pandas as pd
+
+data = {'Nome': ['João', 'Maria', 'Pedro', 'Ana'],
+    'Idade': [25, 30, 35, 40],
+    'Cidade': ['São Paulo', 'Rio de Janeiro', 'Belo Horizonte', 'Brasília']}
+
+df = pd.DataFrame(data)
+```
+
+Os Dataframes possuem várias funcionalidades, como a capacidade de filtrar, ordenar e agrupar os dados, além de realizar operações matemáticas e estatísticas.
 
 
-# Métodos de Dataframe
+
+# Métodos de Inspeção e Informações Básicas
 
 ## head() - tail ()
 
@@ -21,15 +50,11 @@ Pandas é uma biblioteca do Python utilizado para analises e tratamento de dados
 
 Com o df.info() conseguimos identifcar caracteriscas do nosso dataframe, como as colunas , seus tipos de dados, se os campos são nulos ou não.
 
-## shape()
+## shape
 
 df.shape nos retorna a quantidade de colunas e linhas do nosso dataframe
 
-## Value Counts()
-
- Value counts é responsavel por "contar" valores unicos em nosso dataframe:
-
-
+# Manipulação de Dados
 
 ## GroupBy()
 
@@ -43,7 +68,6 @@ groupby('Animal').sum(numeric_Only=True) #usamos esse parametro no sum caso não
 
 ```
 
-
 ```{python}
 
 groupby('Animal')[['Quantidade]].sum() ## incluindo [[]] criamos um DF
@@ -54,7 +78,6 @@ A            30
 B            40
 C            10
 ```
-
 
 ## Query()
 
@@ -85,6 +108,16 @@ df.query('rating > 100')[['name','rating']]
 nsus = [101010,101020,1010130,50505050]
 df.query['@nsus in NSU']  #USAMOS A VARIAVEL nsus(lista) para filtrar dados do campo Nsu
 ```
+
+
+## Value Counts()
+
+ Value counts é responsavel por "contar" valores unicos em nosso dataframe:
+
+
+
+# Combinação de DataFrames
+
 
 ## Merge
 
@@ -224,14 +257,83 @@ index	chave valor	data	nsu	valor_nsu
 
 - No Exemplo acima, como podemos notar os campos dos dfs não são o mesmo, então ele concatenou na forma de colunas (um ao lado do outro)
 
+## Join
+
+# Limpeza e Transformação de Dados
+
+## Criando Colunas novas
+
+- Quando trabalhamos com dataframe temos a capacidade de adicionar novas colunas em nosso df.
 
 
-Quando concatenamos temos a possibilidade de 
+```{python}
+df1 = pd.DataFrame({
+    'chave': ['A', 'B', 'C'],
+    'valor': [1, 2, 3],
+    'data': ['01/01/2024','02/01/2024','03/01/2024']
+})
+
+
+df1['Produto'] = ['porta','massa corrida'] # criamos uma coluna nova com a lista de produtos
+
+```
+
 ## Rename(columns)
 
+Com o rename podemos renomar colunas/series dos nossos dataframes.
+
+```{python}
+df.rename(columns={'old_name': 'new_name'}, inplace=True)
+
+```
+
+## drop_duplicates()
+
+Quando trabalhamos com dados as vezes nos deparamos com dados duplicados e para isso temos métodos que nos ajudam com isso:
+
+subset : utilizado para especificar quais (uma ou mais) colunas nas quais vamos procurar duplicatas.
+
+
+## Conversão de tipos
+
+Existem vários métodos de conversão de tipos no pandas. Alguns dos principais são:
+
+- `astype()`: Este método é usado para converter o tipo de dados de uma coluna em um tipo de dados específico. Por exemplo, `df['coluna'].astype(int)` converte a coluna em um tipo inteiro.
+
+- `to_numeric()`: Este método é usado para converter uma coluna em um tipo numérico. Ele lida com valores não numéricos, como strings, e os converte em NaN (Not a Number) ou em um valor numérico, se possível.
+
+- `to_datetime()`: Este método é usado para converter uma coluna em um tipo de data e hora. Ele pode lidar com diferentes formatos de data e hora e converter a coluna em um objeto de data e hora do pandas.
+
+- `to_timedelta()`: Este método é usado para converter uma coluna em um tipo de duração de tempo. Ele pode lidar com diferentes formatos de duração de tempo e converter a coluna em um objeto de duração de tempo do pandas.
+
+- `to_string()`: Este método é usado para converter uma coluna em uma representação de string. Ele converte os valores da coluna em strings.
+
+Esses são apenas alguns dos principais métodos de conversão de tipos no pandas. Existem outros métodos disponíveis, dependendo das necessidades específicas de conversão de tipos. 
+
+## fillna()
+## dropna()
+## isna() e notna()
+## duplicated()
+
+
+# Outras Funcionalidades
 
 ## Unique e Nunique()
 
-- diferença entre ambos
+ - Usamos o nunique() para saber quantos valores unicos tem em uma determinada coluna(serie)
+
+ - Já o unique vai retornar uma lista com os valores unicos
+
+## Sort_Values()
+
+## pivot() e pivot_table()
+## melt()
+## apply()
+
+com o método apply podemos aplicar uma função(até mesmo uma lambda) no nosso dataframe:
 
 
+
+## map()
+## applymap()
+## crosstab()

@@ -4,9 +4,8 @@ import os
 # %%
 
 df1 = pd.DataFrame({
-    'chave': ['A', 'B', 'C'],
-    'valor': [1, 2, 3],
-    'data': ['01/01/2024','02/01/2024','03/01/2024']
+    'chave': ['A', 'B', 'C', 'A', 'B', 'A', 'C'],
+    'valor': [1, 2, 3, 2, 3, 4, 5]
 })
 
 df2 = pd.DataFrame({
@@ -17,19 +16,20 @@ df2 = pd.DataFrame({
 unificado = pd.merge(df1, df2, on='chave', how='outer',
                      suffixes=('_esquerda', '_direita'))
 # %%
-unificado = pd.concat([df1,df2]).reset_index()
+unificado = pd.concat([df1, df2]).reset_index()
 unificado
 # %%
 dados = []
 
-for arquivos in os.listdir(r'C:\Users\fb.11129\OneDrive - Elo Participações LTDA\Área de Trabalho\dsfs'):
+for arquivos in os.listdir(r''):
     df = pd.read_excel(arquivos)
     dados.append(df)
 
-concatenado = pd.concat(dados,ignore_index=True)
+concatenado = pd.concat(dados, ignore_index=True)
 
 # %%
-
+df1['valor'].nunique()
+df1['valor'].unique()
 # %%
 
 # %%

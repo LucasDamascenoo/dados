@@ -62,13 +62,13 @@ df.shape nos retorna a quantidade de colunas e linhas do nosso dataframe
 
 - Podemos agrupar informações e trazer valores de multiplas colunas ou apenas uma especifica ['Valor'],['Quantidade'] por exemplo
 
-```{python}
+```python
 
 groupby('Animal').sum(numeric_Only=True) #usamos esse parametro no sum caso não especificarmos uma coluna numerica
 
 ```
 
-```{python}
+```python
 
 groupby('Animal')[['Quantidade]].sum() ## incluindo [[]] criamos um DF
 
@@ -85,25 +85,25 @@ Com o query podemos selecionar dados em um dataframe atraves de uma condição, 
 
 **filtros sem query**
 
-```{python}
+```python
 df[df['nota']>= 6]
 ```
 
 **Filtro por valor**
-```{python}
+```python
 
 df.query('NSU == 10101010')
 ```
 
 **Filtro por valor + selecionando colunas especificas**
 
-```{python}
+```python
 
 df.query('rating > 100')[['name','rating']] 
 ```
 
 **Filtro por uma determinada variavel**
-```{python}
+```python
 
 nsus = [101010,101020,1010130,50505050]
 df.query['@nsus in NSU']  #USAMOS A VARIAVEL nsus(lista) para filtrar dados do campo Nsu
@@ -112,7 +112,30 @@ df.query['@nsus in NSU']  #USAMOS A VARIAVEL nsus(lista) para filtrar dados do c
 
 ## Value Counts()
 
- Value counts é responsavel por "contar" valores unicos em nosso dataframe:
+ Value counts é responsavel por "contar" a frequencia dos valores de um dataframe:
+
+ ```python:
+ 
+ s = pd.Series([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
+
+# Contando a frequência dos valores
+contagem = s.value_counts()
+
+print(contagem)
+
+#retorno
+4    4
+3    3
+2    2
+1    1
+ 
+ 
+ ```
+
+- sort: tSe definido como False, não classifica os valores em ordem decrescente. Por padrão, o valor é True.
+
+- dropna: Se definido como False, inclui contagens de valores NaN na saída. Por padrão, o valor é True, o que significa que NaN é excluído.
+
 
 
 
@@ -128,7 +151,7 @@ Merge: é um metodo que une 2 ou mais dataframes de acordo com um campo em comum
 
 - Outer : O outer join retorna todas as linhas das duas tabelas, preenchendo com valores nulos onde não houver correspondência.
 
-```{python}
+```python
 
 df1 = pd.DataFrame({"key": ["A", "B", "C", "D"], "value1": [1, 2, 3, 4]})
 df2 = pd.DataFrame({"key": ["B", "D", "E", "F"], "value2": [5, 6, 7, 8]})
@@ -148,7 +171,7 @@ key	value1	value2
 
 - Left: retorna todas as linhas da esquerda(primeiro df no merge) e somente os valores correspondentes do segundo dataframe
 
-```{python}
+```python
 unificado = pd.merge(df1,df2, on='key', how='left')
 
 # Retorno
@@ -165,7 +188,7 @@ key	value1	value2
 
 - On: usamos o On para especificar qual a coluna que queremos usar como chaves, **existe a possibilidade de termos chaves com nomes diferentes em cada df, ai usamos left e right**
 
-```{python}
+```python
 unificado = pd.merge(df1,df2, left_on='chave_df1', right_on='chave_df2', how='left')
 
 ```
@@ -174,7 +197,7 @@ unificado = pd.merge(df1,df2, left_on='chave_df1', right_on='chave_df2', how='le
 
 Para esse "problema" temos um atributo suffixes usado para diferenciar qual coluna é de qual campo;
 
-```{python}
+```python
 unificado = pd.merge(df1, df2, on='chave', how='outer',
                      suffixes=('_esquerda', '_direita'))
 
@@ -196,7 +219,7 @@ Com o pd.Concat() podemos unir dois ou mais dataframes, esse método nos permite
 - **Eixos:** Podemos concatenar nossos dataframes em dois eixos, horizontal axis=1 (colunas) e vertical axis=0 (linhas)
 
 
-```{python}
+```python
 df1 = pd.DataFrame({
     'chave': ['A', 'B', 'C'],
     'valor': [1, 2, 3],
@@ -229,7 +252,7 @@ index	chave	valor	data
 
 **Exemplo onde as colunas não são a mesma**
 
-```{python}
+```python
 df1 = pd.DataFrame({
     'chave': ['A', 'B', 'C'],
     'valor': [1, 2, 3],
@@ -266,7 +289,7 @@ index	chave valor	data	nsu	valor_nsu
 - Quando trabalhamos com dataframe temos a capacidade de adicionar novas colunas em nosso df.
 
 
-```{python}
+```python
 df1 = pd.DataFrame({
     'chave': ['A', 'B', 'C'],
     'valor': [1, 2, 3],
@@ -282,7 +305,7 @@ df1['Produto'] = ['porta','massa corrida'] # criamos uma coluna nova com a lista
 
 Com o rename podemos renomar colunas/series dos nossos dataframes.
 
-```{python}
+```python
 df.rename(columns={'old_name': 'new_name'}, inplace=True)
 
 ```
@@ -311,8 +334,41 @@ Existem vários métodos de conversão de tipos no pandas. Alguns dos principais
 Esses são apenas alguns dos principais métodos de conversão de tipos no pandas. Existem outros métodos disponíveis, dependendo das necessidades específicas de conversão de tipos. 
 
 ## fillna()
+
+- Tambem podemos "filtrar" valores NaN e modificar por valores "padrão" utilizando o fillna()
+
+```python:
+df.fillna({
+    'idade':0,
+    'renda': "N informado"
+})
+
+# transformando o que está NaN em idade para 0 e renda como não informado
+
+```
 ## dropna()
+
+- Dropaaa remove valores que estão como na em um dataframe
+
+```python:
+df2 = df.dropna(subset=["nome", "renda"], how="any")
+df2
+
+```
+- subset: defini as colunas que vamos fazer o "check" de na e dropar os valores
+- how: defini como vai ser a regra de exclusão: any ( vai dropar qualquer valor Nan caso exista em uma das colunas ), all (vai dropar se as ambas as colunas tenham valores nan)
+
 ## isna() e notna()
+
+ - Podemos verificar se existem valores NaN em nossos dataframes utilizando o isna()
+
+```python:
+
+df['idade'].isna().value_counts()
+df['idade'].isna().sum()
+df.isna().sum()
+
+```
 ## duplicated()
 
 
@@ -327,6 +383,7 @@ Esses são apenas alguns dos principais métodos de conversão de tipos no panda
 ## Sort_Values()
 
 ## pivot() e pivot_table()
+
 ## melt()
 ## apply()
 

@@ -8,10 +8,13 @@ df1 = pd.DataFrame({
     'valor': [1, 2, 3, 2, 3, 4, 5]
 })
 
+
+
 df2 = pd.DataFrame({
     'nsu': ['A', 'B', 'D'],
     'valor_nsu': [4, 5, 6]
 })
+
 # %%
 unificado = pd.merge(df1, df2, on='chave', how='outer',
                      suffixes=('_esquerda', '_direita'))

@@ -79,6 +79,81 @@ B            40
 C            10
 ```
 
+## Agregação(agg)
+
+usamos agregações (agg) para aplicar uma ou mais função de agregação (sum,max,min)
+
+
+```python:
+df = pd.DataFrame({
+    'A': [1, 2, 3, 4],
+    'B': [5, 6, 7, 8]
+})
+
+result = df.agg({
+    'A': ['sum', 'mean'],
+    'B': ['min', 'max']
+})
+
+#retorno
+         A    B
+sum   10.0  NaN
+mean   2.5  NaN
+min    NaN  5.0
+max    NaN  8.
+
+```
+
+- Podemos tambem fazer agregações após um agrupamento de informações(groupby) retornando resultados agregados por cada grupo.
+
+```python:
+df = pd.DataFrame({
+    'Category': ['A', 'A', 'B', 'B'],
+    'Values': [1, 2, 3, 4]
+})
+
+result = df.groupby('Category').agg({
+    'Values': ['sum', 'mean']
+})
+
+print(result)
+
+#retorno
+            sum mean
+Category            
+A             3  1.5
+B             7  3.5
+
+```
+
+- Podemos tambem criar funções personalizadas:
+
+
+```python:
+def range_func(x):
+    return x.max() - x.min()
+
+df = pd.DataFrame({
+    'A': [1, 2, 3, 4],
+    'B': [5, 6, 7, 8]
+})
+
+result = df.agg({
+    'A': ['sum', range_func],
+    'B': ['min', 'max']
+})
+
+print(result)
+
+#retorno
+               A    B
+sum         10.0  NaN
+range_func   3.0  NaN # retorno da nossa função personalizada
+min          NaN  5.0
+max          NaN  8.0
+
+```
+
 ## Query()
 
 Com o query podemos selecionar dados em um dataframe atraves de uma condição, semelhante ao SQL.
@@ -394,3 +469,6 @@ com o método apply podemos aplicar uma função(até mesmo uma lambda) no nosso
 ## map()
 ## applymap()
 ## crosstab()
+
+
+

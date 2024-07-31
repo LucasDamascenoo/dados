@@ -220,7 +220,7 @@ print(contagem)
 ## Merge
 
 No mundo dos dados nem sempre teremos as informações em um unico lugar e o pandas facilita a junção dessas informações de algumas maneiras:
-Merge: é um metodo que une 2 ou mais dataframes de acordo com um campo em comum (chave) e o resultado disso são informações que os dataframes tenham em comum (como um join em sql)
+Merge: é um metodo que une 2  dataframes de acordo com um campo em comum (chave) e o resultado disso são informações que os dataframes tenham em comum (como um join em sql)
 
 ### Tipos de junções
 

@@ -391,6 +391,22 @@ Quando trabalhamos com dados as vezes nos deparamos com dados duplicados e para 
 
 subset : utilizado para especificar quais (uma ou mais) colunas nas quais vamos procurar duplicatas.
 
+## drop
+
+Com o drop podemos remover uma ou mais linhas (ou colunas) de um dataframe, podemos passar os indices e o eixo dessa remoção.
+
+
+```python:
+
+registros_a_remover = dados.query('Valor == 0 | Condominio == 0').index
+
+
+dados.drop(registros_a_remover, axis=0,inplace=True)
+
+```
+- axis0 : remove as linha (padrão)
+- axis1 : remove as colunas
+
 
 ## Conversão de tipos
 
@@ -463,6 +479,15 @@ df.isna().sum()
 ## apply()
 
 com o método apply podemos aplicar uma função(até mesmo uma lambda) no nosso dataframe:
+
+```python:
+
+dados['Possui_suite'] = dados['Suites'].apply(
+    lambda x: "Sim" if x > 0 else "Não")
+
+```
+
+- No processo acima, estamos criando uma coluna nova com base em apply + lambda
 
 
 

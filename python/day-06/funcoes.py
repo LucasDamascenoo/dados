@@ -1,6 +1,7 @@
 
-def soma(n1, n2):
-    return n1+n2
+
+def calculaProduto(preco, desconto):
+    return preco - desconto
 
 
-print(soma(10, 2))
+print(calculaProduto(100, 5))

@@ -1,3 +1,14 @@
+# Day01
+
+Python é uma linguagem de alto nivel(proximo a lingua natural), orientado a objeto e tem tipagem dinamica.
+
+Podemos usar Python em diversas areas:
+
+- Dados(Machine Learning/ Analise de dados,Engenharia de dados)- 
+- Backend
+- Devops
+- Automação
+
 # Day02
 
 O que aprendemos hoje?
@@ -96,7 +107,7 @@ else:
 No exemplo acima primeiro ele da check na altura, caso passe ele faz outra validação de idade para ver a idade e passar o preço de acordo com a determinada idade,
 caso nem passe na primeira validação, cai direto no else da altura e define que o cliente não pode entrar
 
-## Operadores condicionais
+## Operadores condicionais/lógicos
 
 Os operadores condições nos ajuda na criação de condições (preposições).
 
@@ -120,6 +131,8 @@ aleatorio = random.randint(1,10) # gere um numerod entre 1 e 10
 ```
 
 ## Listas
+
+
 
 Lista é uma estrutura de dados capaz de armazenar uma lista de dados organizada.
 
@@ -149,6 +162,16 @@ frutas[10] IndentationError: unexpected indent
 - append(): add um valor no fim da lista
 - extend() - add varios elementos no fim da lista
 
+
+## Tuplas
+
+Tuplas são "listas" imutaves,seus elementos não podem ser alterados, adicionados ou removidos
+
+```{python}
+
+coordenadas = (10,20)
+
+```
 
 ## Dicionarios
 
@@ -282,7 +305,6 @@ while contador <= 3:
 Funções é um bloco de código que executa um subprograma que pode ser reutilizavel em diversas partes dos nossos códigos.
 
 
-
 ### Elemento essenciais de uma função
 
 1. "def": define a função
@@ -315,8 +337,37 @@ def extract_audio (video_file:str, output_file: str, eq:bool = True)
 3. **Anotação de parametros**: a partir do py 3.5 podemos definir tipos pros nossos parametros (valor:float,taxa:float)
 
 
+## Parametros
 
 
+
+## Args e Kwargs
+
+
+## Pacotes e Ambientes
+
+ - Pacotes nos ajudam a criar um ambiente isolado , para por exemplo que cada projeto ele tenha seus pacotes e versões de formas individuais
+
+![pacotes](/img/workflow-pacotes.png)
+
+## Poetry
+
+Poetry é uma biblioteca para gerenciamento de dependencias e empacotamento de python
+
+- instalação linux/wsl: curl -sSL https://install.python-poetry.org | python3 - 
+
+
+**criando um novo projeto**
+
+- poetry new nomeProjeto 
+
+**instalando uma dependencia**
+
+- poetry add pandas / poetry add httx
+
+**removendo uma dependencia**
+
+- poetry remove pandas / poetry remove httx
 
 ## List Comprehesion
 
@@ -331,3 +382,12 @@ listComp = [x**2 for x in list1] ## aqui vamos gerar uma lista do dobro de uma l
 
 
 ```
+
+## Trabalhando com Api
+
+
+- endpoint: é a urlq ue faremos a requisição (enviar ou receber)
+- métodos https: get(pegar),post(enviar),put(atualizar),delete(deletar)
+- headers: informações adicionais enviadas juntas com a api (por exemplo dados de autenticação/token)
+- body: parte da requisição onde os dados são enviadas, trabalhamos basicamente com 2 tipos (json e xml)
+

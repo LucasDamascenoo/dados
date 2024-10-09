@@ -14,7 +14,6 @@ Normalizamos tabela para que os dados sejam lidos e gravados de forma mais clara
 - Chave Primaria: Chave primaria identificar um registro unico em uma tabela (ID,CPF,NSU)
 - Chave Estrangeira: Chave primaria de uma tabela que foi adicionado em outra tabela.
 
-
 ## Consultas (Querys)
 
 O objetivo das consultas é retornar dados de uma determinada tabela/view, para isso usamos o SELECT.
@@ -429,7 +428,6 @@ SELECT * FROM TABELA_DE_CLIENTES
 WHERE BAIRRO IN (SELECT DISTINCT BAIRRO FROM TABELA_DE_VENDEDORES)
 
 ```
-
 
 ## Manipulações
 

@@ -21,9 +21,9 @@ string_teste = "ghtj"
 
 # sprit
 
-poema = 'o rato roeu a roupa do rei de roma'
+poema = 'o-rato-roeu-a-roupa-do-rei-de-roma'
 
-print(poema.split())
+print(poema.split(' '))
 
 
 def somaSalario(salario):
@@ -31,3 +31,15 @@ def somaSalario(salario):
 
 
 print(somaSalario(4300))
+
+# reventendo uma string
+print(uma_string_muito_grande[::-1])
+
+print('Lucas Damasceno'[0:5])
+print('Lucas Damasceno'.find('s'))
+print('Lucas Damasceno'.replace('Damasceno', 'Oliveira'))
+
+
+texto = "Olá, mundo! Bem-vindo ao Python."
+
+print(texto.split())

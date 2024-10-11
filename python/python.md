@@ -131,9 +131,9 @@ idade = 29
 
 O "short circuit" (ou "avaliação de curto-circuito") em Python refere-se ao comportamento dos operadores lógicos `and` e `or` ao avaliar expressões booleanas. Em uma expressão de curto-circuito, a avaliação para assim que o resultado é conhecido, sem avaliar o restante da expressão.
 
-### Exemplos
+**Exemplos**
 
-#### Operador `and`
+**Operador** `and`
 ```python
 a = False
 b = True

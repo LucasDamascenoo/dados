@@ -143,6 +143,9 @@ print(resultado)  # Saída: False (a avaliação para após a primeira expressã
 
 ```
 
+# Loops
+
+
 
 # Funçoes
 

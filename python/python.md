@@ -145,6 +145,65 @@ print(resultado)  # Saída: False (a avaliação para após a primeira expressã
 
 # Loops
 
+Loops são estruturas de controle em Python que permitem a execução repetida de um bloco de código enquanto uma condição é verdadeira ou para cada item em uma sequência.
+
+## For Loop
+
+O `for` loop é usado para iterar sobre uma sequência (como uma lista, tupla, string, ou range). É útil quando sabemos o número de iterações ou queremos iterar sobre cada item de uma sequência.
+
+```python
+# Exemplo de for loop iterando sobre uma lista
+frutas = ['maçã', 'banana', 'cereja']
+for fruta in frutas:
+    print(fruta) # Saída:# maçã # banana # cereja
+
+
+# Exemplo de for loop usando range
+for i in range(5):
+    print(i) # Saída:# 0 # 1 # 2 # 3 # 4
+
+```
+
+## While Loops
+
+O `While loop` é usado para repetir um bloco de código enquanto ele for verdadeiro, podemos usar o while em condiçoes que nao sabemos o numero exatos de iterações:
+
+```python
+
+contador = 0
+while contador < 5:
+    print(contador)
+    contador += 1
+
+```
+
+## Break e Continue
+
+**Break**: A instrução break é utilizada para interromper a execução de um loop, saindo imediatamente dele.
+
+```python
+
+while True:
+    user_input = input("Digete uma frase (q para sair) ")
+    if user_input == 'q'
+        break
+    print(f'Seu texto foi {user_input}')    
+
+```
+
+**Continue**: A instrução continue é utilizada para pular a iteração atual do loop e passar para a próxima iteração. Ao encontrar um continue, o código restante dentro do loop para aquela iteração é ignorado.
+
+```python
+
+numeros = range(10)
+
+for numero in numeros:
+    if numero % 2 != 0:
+        continue  # Ignora números ímpares
+    print(f"Número par: {numero}")  
+
+```
+
 
 
 # Funçoes

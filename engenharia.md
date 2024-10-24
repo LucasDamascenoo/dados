@@ -24,3 +24,11 @@ Pipelines de dados é um meio de mover dados de uma origem para um destino, como
 
 - **ETL**: Processo tradicional de integração de dados que envolve extração, transformação e carregamento de dados em um data warehouse.
 - **Pipelines de Dados**: Fluxo contínuo e automatizado de dados de uma origem para um destino, passando por várias etapas de processamento que podem incluir ETL, validação, enriquecimento, e análise em tempo real.
+
+
+## Apis
+
+
+- endpoint sao "pedaços" de uma api que tras informaçoes distintas
+
+https://api/github.com/versions (versions é o endpoint)

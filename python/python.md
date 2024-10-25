@@ -205,6 +205,20 @@ for numero in numeros:
 ```
 
 
+# Listas
+
+
+
+Em python tem um conceito em listas chamados List Comprehensions, que é uma maneira de criar listas de forma "facil"
+
+```python
+
+list_comp = [x for x in range(1, 11)]
+
+print(list_comp)  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+```
+- No exemplo acima, criamos a expressão `x`, que representa cada item na sequência que estamos iterando. Passamos `x` para iterar sobre a sequência fornecida (como uma lista, tupla ou range). A expressão `x` é avaliada para cada item na sequência, e o resultado é adicionado à nova lista.
 
 # Funçoes
 

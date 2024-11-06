@@ -207,8 +207,6 @@ for numero in numeros:
 
 # Listas
 
-
-
 Em python tem um conceito em listas chamados List Comprehensions, que é uma maneira de criar listas de forma "facil"
 
 ```python
@@ -219,6 +217,70 @@ print(list_comp)  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 ```
 - No exemplo acima, criamos a expressão `x`, que representa cada item na sequência que estamos iterando. Passamos `x` para iterar sobre a sequência fornecida (como uma lista, tupla ou range). A expressão `x` é avaliada para cada item na sequência, e o resultado é adicionado à nova lista.
+
+# Tuplas
+
+Tuplas tbm é uma estrutura de dados, semelhante as listas (arrays) tuplas tbm guarda valores de qualquer tipo, mas vamos as diferenças:
+
+
+**Imutavel**: Depois que você cria uma tupla, não é possível modificar seus elementos.
+
+**Definida com Parênteses**: A sintaxe de uma tupla utiliza parênteses () para criar uma sequência de elementos.
+
+**Leve e Rápida**: Por ser imutável, uma tupla pode ser processada mais rapidamente que uma lista, e também consome menos memória.
+
+**Permite Qualquer Tipo de Dado**: Assim como listas, tuplas podem conter qualquer tipo de dado — inteiros, strings, outras tuplas, etc.
+
+```python
+
+minha_tupla = (1, 2, 3, 'a', 'b')
+
+print(minha_tupla)  # Saída: (1, 2, 3, 'a', 'b')
+
+```
+
+## Pora que usar tuplas?
+
+1. Dados que não devem ser alterados: Se você quer garantir que certos dados permaneçam constantes, use tuplas. Como elas são imutáveis, seu conteúdo não será modificado acidentalmente.
+
+2 . Melhor desempenho: Tuplas são mais eficientes que listas em termos de velocidade e uso de memória. Em situações de alto desempenho, onde você só precisa armazenar e ler dados, elas podem ser mais rápidas.
+
+3 . Chaves em dicionários: As tuplas podem ser usadas como chaves em dicionários, pois são imutáveis, ao contrário das listas (que não podem ser usadas como chaves).
+
+**Dados Imutaveis**:
+```python
+
+# DADOS IMUTAVEIS
+coordenadas = (40.7128, -74.0060)
+
+```
+**Funções com Retornos Múltiplos**:Quando uma função retorna vários valores, é comum usar uma tupla:
+
+```python
+
+def calcular_area_perimetro(lado):
+    area = lado ** 2
+    perimetro = 4 * lado
+    return area, perimetro  # Retornando como tupla
+
+resultado = calcular_area_perimetro(5)
+print(resultado)  # Saída: (25, 20)
+
+```
+
+**Usando tuplas como chaves de dicionário**:
+
+```python
+
+pessoas = {
+    ('João', 'Silva'): 28,
+    ('Maria', 'Oliveira'): 34
+}
+print(pessoas[('João', 'Silva')])  # Saída: 28
+
+```
+
+
 
 # Funçoes
 

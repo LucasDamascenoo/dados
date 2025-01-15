@@ -37,6 +37,48 @@ df = pd.DataFrame(data)
 
 Os Dataframes possuem várias funcionalidades, como a capacidade de filtrar, ordenar e agrupar os dados, além de realizar operações matemáticas e estatísticas.
 
+# Lendo Arquivos
+
+Com o pandas temos a capacide de ler e transformar dados de outros tipos de arquivos(csv,xml,excel) em dataFrames.
+
+## Csv
+
+CSV e um tipo de arquivo que separa suas informacoes por , ou ;.
+```python
+import pandas as pd
+
+url = 'caminho onde esta o csv'
+
+df = pd.read_csv(url) # por padrao o read_csv ler arquivos por, mas e se for ;?
+
+df2 = pd.read_csv(url,sep=';')
+
+```
+
+
+# Escrevendo Arquivos
+
+Assim como podemos ler dados em diversos formatos, tambem podemos salvar nossas dfs em formato diferente;
+
+## Csv
+
+CSV e um tipo de arquivo que separa suas informacoes por , ou ;.
+```python
+
+import pandas as pd
+
+data = {'Nome': ['João', 'Maria', 'Pedro', 'Ana'],
+        'Idade': [25, 30, 35, 40],
+        'Cidade': ['São Paulo', 'Rio de Janeiro', 'Belo Horizonte', 'Brasília']}
+
+
+df = pd.DataFrame(data) # transformando nosso dicionario em dataframe
+
+caminho = r'minhapasta\nome_do_meu_arquivo.csv' # aqui definimos onde vamos salvar e o nome do nosso arquivo
+
+pd.to_csv(caminho) # transformando o df em csv
+
+```
 
 
 # Métodos de Inspeção e Informações Básicas
@@ -58,7 +100,7 @@ df.shape nos retorna a quantidade de colunas e linhas do nosso dataframe
 
 ## GroupBy()
 
-- Permite agrupar uma determinada serie/coluna de um dataframe, assimo como no sql tambem precisamos de um função de agregação (sum,mean(média))
+- Permite agrupar uma determinada serie/coluna de um dataframe, assim como no sql tambem precisamos de um função de agregação (sum,mean(média))
 
 - Podemos agrupar informações e trazer valores de multiplas colunas ou apenas uma especifica ['Valor'],['Quantidade'] por exemplo
 

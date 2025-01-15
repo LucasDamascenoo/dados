@@ -26,3 +26,5 @@ resultado = calcular_area_perimetro(5)
 print(resultado)  # Saída: (25, 20)
 
 print(type(resultado))
+
+

@@ -239,7 +239,7 @@ print(minha_tupla)  # Saída: (1, 2, 3, 'a', 'b')
 
 ```
 
-## Pora que usar tuplas?
+## Para que usar tuplas?
 
 1. Dados que não devem ser alterados: Se você quer garantir que certos dados permaneçam constantes, use tuplas. Como elas são imutáveis, seu conteúdo não será modificado acidentalmente.
 

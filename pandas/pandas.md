@@ -41,7 +41,7 @@ Os Dataframes possuem várias funcionalidades, como a capacidade de filtrar, ord
 
 Com o pandas temos a capacide de ler e transformar dados de outros tipos de arquivos(csv,xml,excel) em dataFrames.
 
-## Csv
+## Csv/xlsx
 
 CSV e um tipo de arquivo que separa suas informacoes por , ou ;.
 ```python
@@ -54,6 +54,21 @@ df = pd.read_csv(url) # por padrao o read_csv ler arquivos por, mas e se for ;?
 df2 = pd.read_csv(url,sep=';')
 
 ```
+
+##  Jsons
+
+Tambem somos capazes de ler arquivos no formato json(javascript object notation):
+
+
+```python
+dados_brutos = pd.read_json('pacientes.json')
+dados = pd.json_normalize(dados_brutos['Pacientes'])
+dados.to_json('pacientes_normalizados.json')
+
+```
+**dados_brutos**: utilizando o read_json para ler um arquivo json
+**dados_brutos**: apos carregar os dados, utilizamos o json_normalize para padronizar os dados alinhados
+**dados.to_json**: salvando o df normalizado em um novo json
 
 
 # Escrevendo Arquivos
@@ -79,6 +94,16 @@ caminho = r'minhapasta\nome_do_meu_arquivo.csv' # aqui definimos onde vamos salv
 pd.to_csv(caminho) # transformando o df em csv
 
 ```
+
+## Json
+
+```python
+dados_brutos = pd.read_json('pacientes.json')
+dados = pd.json_normalize(dados_brutos['Pacientes'])
+dados.to_json('pacientes_normalizados.json') # Indica que estamos salvando um arquivo json
+
+```
+
 
 
 # Métodos de Inspeção e Informações Básicas

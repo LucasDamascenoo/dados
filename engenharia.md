@@ -41,8 +41,34 @@ Podemos fazer coletas de dados de diversas fontes como:
 
 ## Apis
 
-- 
+- Apis sao interfaces de programacao que como se fosse um'interprete' que padroniza e troca informacoes com diversos sistemas,usamos muito apis para buscarmos dados de diversas fontes.
 
-- endpoint sao "pedaços" de uma api que tras informaçoes distintas
+Apis podem ser Rest (sao apis que utilizam procotocolo HTTP (get,put,delete)) para enviar e receber dados em formatos json,xml, e tambem existem Apis de streaming que permite a transmisao de dados em tempo real.
 
-https://api/github.com/versions (versions é o endpoint)
+Temos Apis publicas(nao necessita autenticacao para usarmos) e privadas (e necessario autenticacao/tokem para acesso)
+
+ **requisições**: requisições sao pedidos que fazemos para um servidor para que ele nos der informacoes ou execute uma determinada acao, mas mais comuns sao.
+
+- Get: a requisicao mais utilizada e e responsavel por buscar inforcacoes no servidor.
+- Post: utilizada para enviar informacoes para o servidor, como um novo usuario,dados de um form.
+- Put: utilizada para substuicoes completas de informacoes no servidor
+- Delete: Utilizada para deletar informacoes do servidor
+- Patch: utilizada para atualizacoes particais
+
+ **Status Code**: sempre que utilizamos uma requisicao, ela nos retorna um status code, informando se foi bem sucessida, deu algum erro ou falta alguma coisa.
+
+- 2xx(sucesso) : indica que o servidor esta retornando as informacoes de forma correta
+
+- 3xx(redirecionamento) : indica que o cliente deve realizar + alguma acao para que que tenha retorno das informacoes
+
+- 4xx(erro do cliente) : informa erro por parte do cliente, como pagina nao encontrada
+
+- 5xx(erro do servidor): informa que existe erros do lado do servidor.
+
+**endpoint**:  Um endpoint é uma parte específica de uma URL de API que fornece informações distintas.
+
+- www.restaurante.com → Domínio principal (não é necessariamente uma API).
+- www.restaurante.com/api → Pode ser a base da API.
+- www.restaurante.com/api/menu → Endpoint que retorna o cardápio.
+- www.restaurante.com/api/pedidos → Endpoint que retorna pedidos feitos.
+- https://api/github.com/versions → (versions é o endpoint)

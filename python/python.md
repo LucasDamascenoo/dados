@@ -18,12 +18,11 @@ Toda linguagem de programaçao possui tipos de dados e as do python sao as segui
 - **bool**: sao valores boleanos(True ou False)
 
 **Multiple Values**
-- **list**: um conjunto de dados agrupados em uma unica variavel: [1,2,3,4]
-- **dict**: sao nosso dicionarios, onde guardamos dados atraves de chaves e valores
-- **tuple**:
-- **range**: 
-- **set**: 
-
+- **list**: um conjunto de dados agrupados em uma única variável. Listas são mutáveis, o que significa que seus elementos podem ser alterados após a criação. Exemplo: `[1, 2, 3, 4]`
+- **dict**: são nossos dicionários, onde guardamos dados através de chaves e valores. Dicionários são mutáveis e não ordenados até o Python 3.7 (a partir do Python 3.7, eles mantêm a ordem de inserção). Exemplo: `{'nome': 'João', 'idade': 25}`
+- **tuple**: uma sequência de valores agrupados em uma única variável. Tuplas são imutáveis, o que significa que seus elementos não podem ser alterados após a criação. Exemplo: `(1, 2, 3, 4)`
+- **range**: uma sequência de números gerada automaticamente. É frequentemente usada em loops `for`. Exemplo: `range(1, 10)` gera números de 1 a 9.
+- **set**: um conjunto de elementos únicos e não ordenados. Sets são mutáveis, mas seus elementos devem ser imutáveis. Exemplo: `{1, 2, 3, 4}`
 
 ## Type
 
@@ -143,69 +142,80 @@ print(resultado)  # Saída: False (a avaliação para após a primeira expressã
 
 ```
 
-# Loops
-
-Loops são estruturas de controle em Python que permitem a execução repetida de um bloco de código enquanto uma condição é verdadeira ou para cada item em uma sequência.
-
-## For Loop
-
-O `for` loop é usado para iterar sobre uma sequência (como uma lista, tupla, string, ou range). É útil quando sabemos o número de iterações ou queremos iterar sobre cada item de uma sequência.
-
-```python
-# Exemplo de for loop iterando sobre uma lista
-frutas = ['maçã', 'banana', 'cereja']
-for fruta in frutas:
-    print(fruta) # Saída:# maçã # banana # cereja
-
-
-# Exemplo de for loop usando range
-for i in range(5):
-    print(i) # Saída:# 0 # 1 # 2 # 3 # 4
-
-```
-
-## While Loops
-
-O `While loop` é usado para repetir um bloco de código enquanto ele for verdadeiro, podemos usar o while em condiçoes que nao sabemos o numero exatos de iterações:
-
-```python
-
-contador = 0
-while contador < 5:
-    print(contador)
-    contador += 1
-
-```
-
-## Break e Continue
-
-**Break**: A instrução break é utilizada para interromper a execução de um loop, saindo imediatamente dele.
-
-```python
-
-while True:
-    user_input = input("Digete uma frase (q para sair) ")
-    if user_input == 'q'
-        break
-    print(f'Seu texto foi {user_input}')    
-
-```
-
-**Continue**: A instrução continue é utilizada para pular a iteração atual do loop e passar para a próxima iteração. Ao encontrar um continue, o código restante dentro do loop para aquela iteração é ignorado.
-
-```python
-
-numeros = range(10)
-
-for numero in numeros:
-    if numero % 2 != 0:
-        continue  # Ignora números ímpares
-    print(f"Número par: {numero}")  
-
-```
-
-
 # Listas
+
+Listas são um dos tipo de dados do python que nos permite armazenar diversos valores em uma unica variavel, podemos criar listas de diversos tipos de dados, de forma mista e até lista de listas ou lista de objetos.
+
+**Listas são mutaveis** ou seja, permite alterar o valor atribuido
+
+```python
+
+lista_produtos = ['televisão','som portatil','dvd']
+lista_mista = [120, 540.2, 'hello world', [1,2,3,4] ]
+
+```
+
+## Adicionando elementos
+
+1. Adiciona um elemento no final
+numeros.append(6)
+
+2. Adiciona um elemento em uma posição específica
+numeros.insert(2, 99)  # Insere 99 na posição 2
+
+3. Adiciona vários elementos ao final
+numeros.extend([7, 8, 9])
+
+
+## Removendo elementos
+
+1.  Remove o primeiro valor encontrado
+numeros.remove('dvd')  # Remove 'dvd' da lista
+
+```python
+
+lista_produtos = ['televisão','som portatil','dvd']
+lista_mista = [120, 540.2, 'hello world', [1,2,3,4] ]
+```
+
+
+2. Remove e retorna o último elemento (ou um específico pelo índice)
+ultimo = numeros.pop()  # Remove o último
+segundo = numeros.pop(1)  # Remove o índice 1
+
+```python
+
+lista_produtos = ['televisão','som portatil','dvd']
+lista.pop() #'televisão','som portatil'
+
+
+```
+
+3. Remove todos os elementos da lista
+numeros.clear()
+
+```python
+
+lista_produtos = ['televisão','som portatil','dvd']
+lista.clear() #[]
+
+```
+
+## Iterações
+
+Podemos percorrer listas das seguintes maneiras:
+
+1. utilizando o for
+
+```python
+
+lista_produtos = ['televisão','som portatil','dvd']
+
+for produto in lista_produtos:
+    print(produto) #'televisão' ,'som portatil' , 'dvd'
+
+```
+
 
 Em python tem um conceito em listas chamados List Comprehensions, que é uma maneira de criar listas de forma "facil"
 
@@ -279,6 +289,72 @@ pessoas = {
 print(pessoas[('João', 'Silva')])  # Saída: 28
 
 ```
+
+
+# Loops
+
+Loops são estruturas de controle em Python que permitem a execução repetida de um bloco de código enquanto uma condição é verdadeira ou para cada item em uma sequência.
+
+## For Loop
+
+O `for` loop é usado para iterar sobre uma sequência (como uma lista, tupla, string, ou range). É útil quando sabemos o número de iterações ou queremos iterar sobre cada item de uma sequência.
+
+```python
+# Exemplo de for loop iterando sobre uma lista
+frutas = ['maçã', 'banana', 'cereja']
+for fruta in frutas:
+    print(fruta) # Saída:# maçã # banana # cereja
+
+
+# Exemplo de for loop usando range
+for i in range(5):
+    print(i) # Saída:# 0 # 1 # 2 # 3 # 4
+
+```
+
+## While Loops
+
+O `While loop` é usado para repetir um bloco de código enquanto ele for verdadeiro, podemos usar o while em condiçoes que nao sabemos o numero exatos de iterações:
+
+```python
+
+contador = 0
+while contador < 5:
+    print(contador)
+    contador += 1
+
+```
+
+## Break e Continue
+
+**Break**: A instrução break é utilizada para interromper a execução de um loop, saindo imediatamente dele.
+
+```python
+
+while True:
+    user_input = input("Digete uma frase (q para sair) ")
+    if user_input == 'q'
+        break
+    print(f'Seu texto foi {user_input}')    
+
+```
+
+**Continue**: A instrução continue é utilizada para pular a iteração atual do loop e passar para a próxima iteração. Ao encontrar um continue, o código restante dentro do loop para aquela iteração é ignorado.
+
+```python
+
+numeros = range(10)
+
+for numero in numeros:
+    if numero % 2 != 0:
+        continue  # Ignora números ímpares
+    print(f"Número par: {numero}")  
+
+```
+
+
+
+
 
 
 

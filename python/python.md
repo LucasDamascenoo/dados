@@ -354,9 +354,66 @@ for numero in numeros:
 
 
 
+# Exceções
+
+Exceções são levantadas quando ocorrem erros inesperados durante a execução do código.
+
+Exceções (tratadas) não trava a execução do restante do código.
+
+## Quando usar exceções?
+
+1. Entrada de usuarios
+
+```{python}
+
+try:
+    idade = int(input("Digite sua idade: "))
+    print(f"Você tem {idade} anos.")
+except ValueError:
+    print("Erro: Você deve digitar um número inteiro!")
+
+```
+
+2. Trabalhar com Arquivos
+
+```{python}
+
+try:
+    with open("arquivo_inexistente.txt", "r") as f:
+        conteudo = f.read()
+except FileNotFoundError:
+    print("Erro: O arquivo não foi encontrado!")
+
+```
+3. Trabalhar com Apis
+
+```{python}
+
+import requests
+
+try:
+    resposta = requests.get("https://siteinexistente.com")
+    print(resposta.text)
+except requests.exceptions.RequestException:
+    print("Erro: Não foi possível acessar o site.")
+
+```
+
+4. Erros que não podem ser evitados mas podem ser tratado
+
+```{python}
+
+try:
+    lista = [1, 2, 3]
+    print(lista[5])  # Índice inválido
+except IndexError:
+    print("Erro: Índice fora do alcance!")
+
+```
 
 
 
+# With Open
 
 # Funçoes
 

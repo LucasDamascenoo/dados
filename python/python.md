@@ -201,6 +201,31 @@ lista.clear() #[]
 
 ```
 
+## Zip 
+
+O zip() em Python é uma função embutida que combina duas ou mais sequências (listas, tuplas, etc.) elemento por elemento, criando um iterador de tuplas. Ele é útil para unir dados relacionados de diferentes coleções.
+
+```{python}
+
+nomes = ["Alice", "Bob", "Carlos"]
+idades = [25, 30, 22]
+
+combinado = zip(nomes, idades)
+print(list(combinado))
+
+#saida [('Alice', 25), ('Bob', 30), ('Carlos', 22)]
+
+
+```
+
+**Uso Comuns**: 
+
+- Iterar sobre múltiplas listas ao mesmo tempo:
+
+- Criar dicionários:
+
+- Juntar listas de colunas para formar linhas (como em uma matriz transposta):
+
 ## Iterações
 
 Podemos percorrer listas das seguintes maneiras:

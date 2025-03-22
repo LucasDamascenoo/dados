@@ -3,6 +3,37 @@
 
 Pandas é uma biblioteca do Python utilizado para analises e tratamento de dados.
 
+# loc e iloc
+
+## Loc
+loc eh a maneira de navegarmos pelos dados atraves do nome dos indices de um dataFrame ou Series.
+
+- Usa nomes de índices e colunas para selecionar dados.
+- Inclui o valor do índice final quando fatiamos um intervalo ([start:end]).
+- Aceita listas, slices, booleanos e máscaras condicionais.
+
+
+## Iloc
+
+ja o iloc eh a maneira de navegarmos pelos dados atraves da posicao.
+
+- Usa índices numéricos (posição das linhas e colunas).
+- Não inclui o valor final ao fatiar ([start:end]).
+- Aceita listas, slices e índices negativos.
+
+```Python:
+
+df.iloc[linhas, colunas]
+
+linhas → Define quais linhas serão selecionadas.
+colunas → Define quais colunas serão selecionadas.
+
+```
+
+![alt text](image.png)
+
+
+
 # Series e Dataframes
 
 As principais estruturas de dados do Pandas são as Series e os Dataframes.
@@ -121,6 +152,14 @@ Com o df.info() conseguimos identifcar caracteriscas do nosso dataframe, como as
 
 df.shape nos retorna a quantidade de colunas e linhas do nosso dataframe
 
+## Columns
+
+Com df.columns conseguimos identificar as colunas que fazem parte do nosso dataFrame.
+
+## dTypes
+
+Com o dtypes identificamos os tipos de dados de cada coluna do nosso dataFrame.
+
 # Manipulação de Dados
 
 ## GroupBy()
@@ -219,6 +258,55 @@ range_func   3.0  NaN # retorno da nossa função personalizada
 min          NaN  5.0
 max          NaN  8.0
 
+```
+
+# Filtros
+
+## Isin() 
+
+isin() eh um metodo do pandas utilizado para filtrar e identificar valores em um DataFrame ou series.
+
+- Verificar se os valor passado pertece a um conjunto ou nao
+- retornar um array booleano
+
+```python:
+
+df['coluna'].isin([2,3,4,5])
+
+0    False
+1     True
+2    False
+3     True
+4    False
+Name: coluna, dtype: bool
+
+
+```
+
+## isna() 
+
+- Usado para verificar valores ausentes ou nulos (isnull)
+- retornar uma array booleano, onde true indica que o valor eh na ou null.
+
+```python:
+
+df = pd.DataFrame({'coluna': [1, 2, None, 4, None]})
+
+df['coluna'].isna()
+
+```
+
+## fillna()
+
+- Tambem podemos "filtrar" valores NaN e modificar por valores "padrão" utilizando o fillna()
+
+```python:
+df.fillna({
+    'idade':0,
+    'renda': "N informado"
+})
+
+# transformando o que está NaN em idade para 0 e renda como não informado
 ```
 
 ## Query()
@@ -356,7 +444,7 @@ chave	valor_esquerda	valor_direita
 
 ## Concat
 
-Com o pd.Concat() podemos unir dois ou mais dataframes, esse método nos permite unidicar dfs sejam por linhas (um abaixo do outro) ou por colunas (um ao lado do outro)
+Com o pd.Concat() podemos unir dois ou mais dataframes, esse método nos permite unificar dfs sejam por linhas (um abaixo do outro) ou por colunas (um ao lado do outro)
 
 - **Eixos:** Podemos concatenar nossos dataframes em dois eixos, horizontal axis=1 (colunas) e vertical axis=0 (linhas)
 
@@ -387,7 +475,7 @@ index	chave	valor	data
 
 ```
 
-- No processo acima unificamos dois dataframes que possuem a mesma estrutura de nomes, no caso um fico abaixo do outro, no df2 não tem informação de data e vem como NaN.
+- No processo acima unificamos dois dataframes que possuem a mesma estrutura de nomes, no caso um ficou abaixo do outro, no df2 não tem informação de data e vem como NaN.
 
 - Reset_index() foi usado para que os indexes sejam feito do "zero" pois sem isso, cada df terá seu index
 
@@ -424,11 +512,40 @@ index	chave valor	data	nsu	valor_nsu
 
 ## Join
 
+Semelhante ao Merge o join unifica os dados de acordo com o indice ou seja se tivermos 2 dfs com indices 1-2-3-4 e 1-2-5-6 os dados que serao unificados serao apenas com os indices 1 e 2 (sao os indices que dao Match)
+
+```Python:
+
+df1 = pd.DataFrame({'Nome': ['Ana', 'Beto', 'Carlos']}, index=[1, 2, 3])
+df2 = pd.DataFrame({'Idade': [25, 30, 40]}, index=[1, 2, 4])
+
+df_join = df1.join(df2)
+print(df_join)
+
+     Nome  Idade
+1    Ana   25.0
+2   Beto   30.0
+3  Carlos   NaN
+
+
+```
+
+**Metodo How=**
+
+Define como os dados vao ser retornados:
+
+- left(padrao) : Mantém todos os índices do DataFrame original (df1)
+- right: 	Mantém todos os índices do DataFrame secundário (df2).
+- inner:  Mantém apenas os índices que aparecem nos dois DataFrames.
+- outer:  Mantém todos os índices de ambos os DataFrames, preenchendo com NaN quando necessário.
+
+
 # Limpeza e Transformação de Dados
+
 
 ## Criando Colunas novas
 
-- Quando trabalhamos com dataframe temos a capacidade de adicionar novas colunas em nosso df.
+- Quando trabalhamos com dataframe temos a capacidade de adicionar novas colunas em nosso df. 
 
 
 ```python
@@ -443,6 +560,25 @@ df1['Produto'] = ['porta','massa corrida'] # criamos uma coluna nova com a lista
 
 ```
 
+- Podemos criar novas colunas atraves do apply() + lambda
+
+
+```python
+
+df['Categoria'] = df['Idade'].apply(lambda x: 'Jovem' if x < 30 else 'Adulto')
+
+```
+
+- Editar Colunas existentes
+
+```python
+
+df['Idade'] = df['Idade'] + 1
+
+df['Cidade'] = df['Cidade'].replace('SP','RJ')
+
+```
+
 ## Rename(columns)
 
 Com o rename podemos renomar colunas/series dos nossos dataframes.
@@ -451,12 +587,6 @@ Com o rename podemos renomar colunas/series dos nossos dataframes.
 df.rename(columns={'old_name': 'new_name'}, inplace=True)
 
 ```
-
-## drop_duplicates()
-
-Quando trabalhamos com dados as vezes nos deparamos com dados duplicados e para isso temos métodos que nos ajudam com isso:
-
-subset : utilizado para especificar quais (uma ou mais) colunas nas quais vamos procurar duplicatas.
 
 ## drop
 
@@ -475,6 +605,43 @@ dados.drop(registros_a_remover, axis=0,inplace=True)
 - axis1 : remove as colunas
 
 
+``` python:
+
+df.drop(columns=['Cidade'],inplace=True)
+df
+
+
+```
+
+
+## drop_duplicates()
+
+Quando trabalhamos com dados as vezes nos deparamos com dados duplicados e para isso temos métodos que nos ajudam com isso:
+
+subset : utilizado para especificar quais (uma ou mais) colunas nas quais vamos procurar duplicatas.
+
+## Sort_Values()
+
+ordena a uma ou mais coluna de um dataFrame.
+
+- sort_values cria um novo dataframe (nao altera o df original)
+
+
+```python:
+
+df.sorte_values(by='idade')
+df_ordenado = df.sort_values(by='Idade', ascending=False)
+df_ordenado = df.sort_values(by='Idade', na_position='first')
+df.sort_values(by='Idade', inplace=True)
+
+```
+
+- sort_values(by='coluna') → Ordena pelo valor de uma coluna.
+- ascending=False → Ordena em ordem decrescente.
+- by=['col1', 'col2'] → Ordena por várias colunas.
+- na_position='first' → Move valores nulos para o início.
+- inplace=True → Altera o próprio DataFrame 
+
 ## Conversão de tipos
 
 Existem vários métodos de conversão de tipos no pandas. Alguns dos principais são:
@@ -491,17 +658,7 @@ Existem vários métodos de conversão de tipos no pandas. Alguns dos principais
 
 Esses são apenas alguns dos principais métodos de conversão de tipos no pandas. Existem outros métodos disponíveis, dependendo das necessidades específicas de conversão de tipos. 
 
-## fillna()
 
-- Tambem podemos "filtrar" valores NaN e modificar por valores "padrão" utilizando o fillna()
-
-```python:
-df.fillna({
-    'idade':0,
-    'renda': "N informado"
-})
-
-# transformando o que está NaN em idade para 0 e renda como não informado
 
 ```
 ## dropna()
@@ -538,11 +695,14 @@ df.isna().sum()
 
  - Já o unique vai retornar uma lista com os valores unicos
 
-## Sort_Values()
+
+
+
 
 ## pivot() e pivot_table()
 
 ## melt()
+
 ## apply()
 
 com o método apply podemos aplicar uma função(até mesmo uma lambda) no nosso dataframe:

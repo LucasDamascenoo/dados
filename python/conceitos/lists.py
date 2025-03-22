@@ -1,25 +1,32 @@
 
 
-list_comp = [x for x in range(1, 11)]
+# list_comp = [x for x in range(1, 11)]
 
-print(list_comp)
-
-
-lista_produtos = ['televisão', 'som portatil', 'dvd']
-
-lista_produtos.append('video game')
+# print(list_comp)
 
 
-for produto in lista_produtos:
-    print(produto)
+# lista_produtos = ['televisão', 'som portatil', 'dvd']
+
+# lista_produtos.append('video game')
 
 
-def calcular_area_perimetro(lado):
-    area = lado ** 2
-    perimetro = 4 * lado
-    return area, perimetro  # Retornando como tupla
+# for produto in lista_produtos:
+#     print(produto)
 
 
-resultado = calcular_area_perimetro(5)
-print(resultado)  # Saída: (25, 20)
-print(type(resultado))
+# def calcular_area_perimetro(lado):
+#     area = lado ** 2
+#     perimetro = 4 * lado
+#     return area, perimetro  # Retornando como tupla
+
+
+# resultado = calcular_area_perimetro(5)
+# print(resultado)  # Saída: (25, 20)
+# print(type(resultado))
+
+
+lista_idades = [22, 24, 26, 33, 31, 26, 89, 78]
+
+lista_idades.sort()
+
+print(lista_idades)

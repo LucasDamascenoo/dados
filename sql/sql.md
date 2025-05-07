@@ -2,7 +2,6 @@
 
 Documentando meus estudos e projetos em SQL.
 
-
 ## Conceitos
 
 ### Normalização
@@ -31,152 +30,6 @@ select
   category, products
 from needful_things.orders
 
-```
-
-## Filtros
-
-Quando trabalhamos com consultas, nem sempre vamos querer retornar tudo, as vezes queremos retornar dados atráves de uma determinada condição, para isso usamos o WHERE.
-
-### Where
-```sql 
-select *
-from needful_things.orders
-WHERE SALES = 1000;
-
-```
-### Condições
-
-Em conjunto com o where, temos condições adicionais que melhoram nossos filtros
-
-- like e Not Like
-
-```sql 
-select 
-  category, products
-from needful_things.orders
-where products like '%uva%' -- pode ter "uva" tanto no começo quanto no fim
-
-select 
-  category, products
-from needful_things.orders
-where products like 'uva%' -- vai retornar algo caso tenha "uva" no começo
-
-Select
-  category, products
-from needful_things.orders
-where products like '%uva' -- vai retornar algo caso tenha "uva" no fim
-
-Select
-  category, products
-from needful_things.orders
-where products not like '%uva' -- vai retornar tudo que não tenha "uva" 
-```
-
-
-- Between
-Usado para retornar um intervalo (valores e datas)
-
-```sql 
-select 
-  category, products
-from needful_things.orders
-where date between '01/01/2024' and '19/03/2024' 
-```
-
-- In e Not In
-vai retornar de acordo com os valores passados
-
-```sql 
-select 
-  category, products
-from needful_things.orders
-where products in ('pa','ra','dh') -- vai retornar somente dados que correspondem a essa lista
-
-select 
-  category, products
-from needful_things.orders
-where products not in ('pa','ra','dh') -- vai retornar tudo que não esteja aqui dentro
-```
-
-- And , Or e Not
-Utilizados para criar duas ou mais condições
-
-```sql 
-select 
-  category, products
-from needful_things.orders
-where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
-
-select 
-  category, products
-from needful_things.orders
-where products  in ('pa','ra','dh') or cidade in ('sp','rj','ba') -- vai retornar dados apenas se uma das condições forem verdade
-```
-
-
-## Aliases
-
-Podemos criar 'apelidos' tanto em colunas quanto em tabelas utilizando o AS
-
-```sql 
-select 
-  category AS categoria,
-  products AS produtos
-from needful_things.orders
-where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
-
-select 
-  category, products
-from needful_things.orders AS order
-where products  in ('pa','ra','dh') or cidade in ('sp','rj','ba') -- vai retornar dados apenas se uma das condições forem verdade
-```
-
-
-## Funções de agregações
-
-Temos funções de agregações que realizam um determinado calculo no SQL.
-
-- AVG(Média)
-
-```sql 
-select 
-avg(salary) as média_salario
-from needful_things.orders
-where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
-```
-
-- SUM(Soma)
-
-```sql 
-select 
-sum(salary) as soma_salario
-from needful_things.orders
-where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
-```
-- COUNT(Conta o conjunto)
-
-```sql 
-select 
-count(funcionarios) as qtd_funcionarios
-from needful_things.orders
-where cidade in ('sp','bh','rj')  -- vai retornar dados apenas se todas as condições forem verdade
-```
-- MIN (Encontra o menor valor)
-
-```sql 
-select 
-min(age) as menor_idade
-from needful_things.orders
-where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
-```
-
-- MAX (Encontra o valor Máximo)
-
-```sql 
-select 
-max(age) as maior_idade
-from needful_things.orders
-where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
 ```
 
 ### Order By
@@ -247,6 +100,43 @@ QUANTIDADE
 HAVING SUM(PRECO) > 2
 ```
 
+### Distinc
+
+retorna valores distintos de uma determinada coluna.
+
+```sql 
+SELECT DISTINCT * FROM tb_products;
+```
+### top
+
+Limita a quantidade de registros em uma consulta SQL.
+
+```sql 
+select 
+ top 10 *
+from needful_things.orders
+
+
+```
+
+
+### Aliases
+
+Podemos criar 'apelidos' tanto em colunas quanto em tabelas utilizando o AS
+
+```sql 
+select 
+  category AS categoria,
+  products AS produtos
+from needful_things.orders
+where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
+
+select 
+  category, products
+from needful_things.orders AS order
+where products  in ('pa','ra','dh') or cidade in ('sp','rj','ba') -- vai retornar dados apenas se uma das condições forem verdade
+```
+
 ### Ordem de execução
 
 Essa é a ordem de execução em uma query sql.
@@ -257,25 +147,168 @@ Essa é a ordem de execução em uma query sql.
 4º HAVING
 5º SELECT
 6º ORDER BY
-7º LIMIT
+7º TOP
 
-## Limit
 
-Limita a quantidade de registros em uma consulta SQL.
+
+## Filtros
+
+Quando trabalhamos com consultas, nem sempre vamos querer retornar tudo, as vezes queremos retornar dados atráves de uma determinada condição, em conjunto com o where temos 5 tipos de condicoes que podemos usar em conjunto.
+
+
+1. operador de comparacao
+2. operador logico
+3. operador de range
+4. operador de membros
+5. operador de procura
+
+
+### operadores
+
+utilizados o operador de comparacao quando queremos comparar duas coisas
+
+sintax de uma comparacao no sql: **expressao operador expressao**
+
+tipos de condicoes:
+
+1. coluna vs coluna: **nome = sobrenome**
+2. condicao vs valor: **idade       >=     10** 
+3. funcao vs valor: **UPPER(nome) = 'LUCAS'**
+4. expressao vs valor : **preco * quantidade = 100**
+5. subquery vs valor : **(select avg(sales) from vendas) = 1000**
+
+#### operadores de comparacao
+
+1. = : check se dos valores sao iguais
+2. != : check se os valores nao sao iguais
+3. > : check se um dos valores eh maior que o outro
+4. >=: check se um dos valores eh maior ou igual ao outro
+5. <: check se um dos valores eh menor que o outro
+6. <=: check se um dos valores eh menor ou igual ao outro
+
+#### operadores logicos
+
+- And , Or e Not
+Utilizados para criar duas ou mais condições
 
 ```sql 
 select 
-*
+  category, products
 from needful_things.orders
-LIMIT 5;
+where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
+
+select 
+  category, products
+from needful_things.orders
+where products  in ('pa','ra','dh') or cidade in ('sp','rj','ba') -- vai retornar dados apenas se uma das condições forem verdade
+
+select 
+*
+from 
+where products  not in ('pa','ra','dh')-- vai retornar dados invertendo a condicao,ou seja vai trazer tudo menos o que esta na lista (pa,ra,dh)
 ```
 
-## Distinc
+#### Range operador
 
-retorna valores distintos de uma determinada coluna.
+utilizado para filtrar dados entre uma condicao e outra, seja um valor ou uma data (usado bastante com datas)
 
 ```sql 
-SELECT DISTINCT * FROM tb_products;
+select 
+  category, products
+from needful_things.orders
+where date between '01/01/2024' and '19/03/2024' 
+
+**tudo que estiver abaixo da primeira condicao ou acima da segunda sera considerado falso e os dados nao serao retornados**
+```
+
+#### operador de 'listas'
+
+- In e Not In
+vai retornar de acordo com os valores passados
+
+```sql 
+select 
+  category, products
+from needful_things.orders
+where products in ('pa','ra','dh') -- vai retornar somente dados que correspondem a essa lista
+
+select 
+  category, products
+from needful_things.orders
+where products not in ('pa','ra','dh') -- vai retornar tudo que não esteja aqui dentro
+```
+
+#### operador de 'pesquisa'
+
+utilizamos o like para buscar um determinado padrao em um texto.
+
+```sql 
+select 
+  category, products
+from needful_things.orders
+where products like '%uva%' -- pode ter "uva" tanto no começo quanto no fim
+
+select 
+  category, products
+from needful_things.orders
+where products like 'uva%' -- vai retornar algo caso tenha "uva" no começo
+
+Select
+  category, products
+from needful_things.orders
+where products like '%uva' -- vai retornar algo caso tenha "uva" no fim
+
+Select
+  category, products
+from needful_things.orders
+where products not like '%uva' -- vai retornar tudo que não tenha "uva" 
+```
+
+## Funções de agregações
+
+Temos funções de agregações que realizam um determinado calculo no SQL.
+
+- AVG(Média)
+
+```sql 
+select 
+avg(salary) as média_salario
+from needful_things.orders
+where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
+```
+
+- SUM(Soma)
+
+```sql 
+select 
+sum(salary) as soma_salario
+from needful_things.orders
+where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
+```
+- COUNT(Conta o conjunto)
+
+```sql 
+select 
+count(funcionarios) as qtd_funcionarios
+from needful_things.orders
+where cidade in ('sp','bh','rj')  -- vai retornar dados apenas se todas as condições forem verdade
+```
+- MIN (Encontra o menor valor)
+
+```sql 
+select 
+min(age) as menor_idade
+from needful_things.orders
+where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
+```
+
+- MAX (Encontra o valor Máximo)
+
+```sql 
+select 
+max(age) as maior_idade
+from needful_things.orders
+where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
 ```
 
 ## Is Null e Is Not Null
@@ -330,21 +363,29 @@ SELECT report_code, coalesce(precipation,'n/a') FROM STATION_DATA
 ```
 **caso o campo precipitation seja nulo, setamos o 'n/a' para essas linhas**
 
-## Joins
+### Joins
 
-Jois é o relacionamento entre tabela, como podemos ligar e trazer dados de uma na outra atraves de chaves e campos relacionados.
+Jois sao usados para combinar dados de uma ou mais tabelas atraves de campos em comum (como uma chave primaria ou estrangeira )
 
 ![joins](/dados/img/joins.png)
 
-### Inner Join/Join
+
+#### Porque usar Joins?
+
+1. combinar dados de tabelas diferentes em uma unica visao : inner - left
+2. enriquecimento de dados 'buscar dados extras de outras tabelas' :  left
+3. checkar a existencia 'filtrar' de um determinado dado em outra tabela : inner
+
+
+#### Inner Join/Join
 
 - é o join padrão do sql(podendo ser usado inner join ou somente join)
 - Trazem os dados que correspodem as duas tabelas, tudo que as chaves não batam não vai trazer, tanto na tabela do from quanto da tabela do join.
 
 
-### Left Join
+#### Left Join
 
-- mantem todos os dados da esquerda (tabela do from) e vamos tentar encontrar o que tem na direita
+- mantem todos os dados da esquerda (tabela do from) e vamos tentar encontrar o que tem na direita (tabela do join)
 - tudo que não tenha correspondencia vai trazer como Null(vazio)
 
 

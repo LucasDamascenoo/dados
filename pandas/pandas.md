@@ -660,10 +660,10 @@ Esses são apenas alguns dos principais métodos de conversão de tipos no panda
 
 
 
-```
+
 ## dropna()
 
-- Dropaaa remove valores que estão como na em um dataframe
+- Dropana remove valores que estão como Na em um dataframe
 
 ```python:
 df2 = df.dropna(subset=["nome", "renda"], how="any")

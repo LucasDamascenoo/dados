@@ -6,6 +6,7 @@ Repositorio criado para acompanhar meus estudos na área de dados afim de aprimo
 [Python](./python/python.md)
 [SQL](./sql/sql.md)
 [Pandas](./pandas/pandas.md)
+[Selenium](./selenium/selenium.md)
 [AirFlow](./airflow/airflow.md)
 [Projetos](./)
 

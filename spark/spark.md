@@ -62,25 +62,31 @@ spark = SparkSession.builder \
 # Lendo Arquivos
 
 
-- csv
+## csv
 
 ```{python}
 
-from pyspark.sql import SparkSession
-
-spark = SparkSession.builder \
-    .master('local[*]) \
-    .appName("Iniciando com spark")
-    .getOrCreate()
-
+dados_csv = spark.read.csv('caminho.csv',header=True,inferSchema =True, sep=';')
 
 ```
+
+**parametros**:
+
+1 - caminho onde esta localizado o csv
+2 - header = true : indica que queremos que o df tenha o cabeçalho
+3 - inferSchema = true : indica que spark vai identificar os tipos de cada coluna
+4 - sep : especificação do separador (, ou ;)
+
+## excel
+
 
 
 # Visualizando dados
 
-- spark.show()
+- spark.show() - 
 - spark.limit(5) : mostra os 5 primeiros registros
+- spark.printSchema : mostra os metadados do df (int,strint,date)
+
 
 
 # Renomeando Colunas

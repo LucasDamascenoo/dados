@@ -374,7 +374,7 @@ Jois sao usados para combinar dados de uma ou mais tabelas atraves de campos em 
 
 1. combinar dados de tabelas diferentes em uma unica visao : inner - left
 2. enriquecimento de dados 'buscar dados extras de outras tabelas' :  left
-3. checkar a existencia 'filtrar' de um determinado dado em outra tabela : inner
+3. checkar a existencia 'filtrar' de um determinado dado em outra tabela : inner - left + where
 
 
 #### Inner Join/Join

@@ -21,7 +21,7 @@ engine em memoria > busca o dado e salva em memoria
 
 -  Driver Program: este é o entry point do Spark. É onde o Spark Context é criado e é onde se define o fluxo de execução, bem como o RDD e o que deve ser executado em paralelo pelos Executores.
 
-- Spark Context: Estabelece configurações de memória e processamento dos Workers Nodes(maquinas). Além disso é capaz de conectar com os diferentes tipos de Cluster Manager (além do próprio Spark Cluster Manager) como Apache Mesos ou Yarn do Hadoop. 
+- Spark Context: Estabelece configurações de memória e processamento dos Workers Nodes(maquinas). Além disso é capaz de conectar com os diferentes tipos de Cluster Manager (além do próprio Spark Cluster Manager) como Apache Mesos ou Yarn do Hadoop e o Kubernets. 
 
 
 ## RDD (resilient distributed dataset)

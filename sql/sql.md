@@ -212,7 +212,7 @@ where products  not in ('pa','ra','dh')-- vai retornar dados invertendo a condic
 
 utilizado para filtrar dados entre uma condicao e outra, seja um valor ou uma data (usado bastante com datas)
 
-```sql 
+```sql: 
 select 
   category, products
 from needful_things.orders
@@ -388,27 +388,104 @@ Jois sao usados para combinar dados de uma ou mais tabelas atraves de campos em 
 - mantem todos os dados da esquerda (tabela do from) e vamos tentar encontrar o que tem na direita (tabela do join)
 - tudo que não tenha correspondencia vai trazer como Null(vazio)
 
+#### Right Join
 
-### Right Join
+- mantem todos os dados da direta (tabela do join) e vamos tentar encontrar o que tem na direita(tabela do from)
 
- - mantem todos os dados da direta (tabela do join) e vamos tentar encontrar o que tem na direita(tabela do from)
- - tudo que não tenha correspondencia vai trazer null
+- tudo que não tenha correspondencia vai trazer null
 
-
-### Full Join
+#### Full Join
 
 - Tras todos dos dados de ambas as tabela
 - o que não tem correspondencia vai trazer como Null(Vazio)
 
-### Union
+### Anti Joins
 
+Anti Joins são usamos para nos ajudar a identificar/trazer os dados que não tem correspondencia(somente) entre as tabelas.
 
-Podemos unir duas ou mais tabelas utilizando UNION.
-- Union aplica o distinct no retorno dos dados
+**Exemplo de uso: Você tem uma tabela de Clientes e uma tabela de Pedidos. Você quer encontrar todos os clientes que nunca fizeram nenhum pedido.**
 
-- temos que ter o mesmo numero de campos (e os tipos devem ser iguais) em ambas consultas
+#### Left Anti Join
+ 
+ semelhante ao Left Join, iremos usar a sintax com a diferença que pegamos os registros nulos da tabela de comparação (right)
 
-- os nomes das colunas são representados pela primeira consulta
+```sql:
+
+SELECT
+    c.id_cliente,
+    c.nome_cliente
+FROM
+    Clientes c
+LEFT JOIN
+    Pedidos p ON c.id_cliente = p.id_cliente
+WHERE
+    p.id_cliente IS NULL;
+
+-- Essa consulta retornaria todos os clientes (com id_cliente e nome_cliente) que não possuem nenhum id_cliente correspondente na tabela Pedidos, ou seja, clientes que nunca fizeram pedidos.
+
+```
+
+#### Right Anti Join
+
+O Right Anti Join (também conhecido como RIGHT EXCLUDING JOIN) retorna todas as linhas da tabela da direita que não têm uma correspondência na tabela da esquerda, com base na condição de junção.
+
+**Exemplo de uso:Imagine que você tem uma tabela Produtos e uma tabela Vendas. Você quer saber quais produtos não foram vendidos ainda.**
+
+```SQL:
+
+SELECT
+    
+FROM
+    produtos
+RIGHT JOIN
+    vendas ON tabela_esquerda.coluna_comum = tabela_direita.coluna_comum
+WHERE
+    tabela_esquerda.coluna_comum IS NULL;;
+
+-- Essa consulta retornaria todos oS pedidos (com id_cliente e nome_cliente) que não possuem nenhum id_cliente correspondente na tabela Pedclientes , ou seja, pedidos que não tem clientes atrelados.
+
+```
+
+### Full Anti Join
+
+O Full Anti Join (também conhecido como FULL EXCLUDING JOIN ou SYMMETRIC DIFFERENCE) retorna todas as linhas de ambas as tabelas que não têm uma correspondência uma na outra, com base na condição de junção. É como dizer "me mostre o que é exclusivo de cada lado, mas não o que é comum
+
+```SQL:
+
+SELECT
+    tabela_esquerda.*,
+    tabela_direita.*
+FROM
+    tabela_esquerda
+FULL OUTER JOIN
+    tabela_direita ON tabela_esquerda.coluna_comum = tabela_direita.coluna_comum
+WHERE
+    tabela_esquerda.coluna_comum IS NULL OR tabela_direita.coluna_comum IS NULL
+
+-- Essa consulta retornaria todos oS pedidos (com id_cliente e nome_cliente) que não possuem nenhum id_cliente correspondente na tabela Pedclientes , ou seja, pedidos que não tem clientes atrelados.
+
+```
+
+### Unions
+
+No SQL temos os joins(junção de colunas) e os unions (junção de linhas), com algumas particularidades:
+
+1 - Número de Colunas: Cada instrução SELECT dentro do UNION deve ter o mesmo número de colunas
+2 - Ordem das Colunas: As colunas nas instruções SELECT devem estar na mesma ordem.
+3 - Tipos de Dados Similares: As colunas correspondentes em cada instrução SELECT devem ter tipos de dados compatíveis (ou seja, você pode unir um VARCHAR com outro VARCHAR, ou um INT com um DECIMAL se a conversão for possível, mas não um VARCHAR com um INT diretamente sem um CAST).
+
+**Exemplos de Uso:**
+
+1 - Combinar Dados de Tabelas Semelhantes
+2 - Consolidar Diferentes Tipos de Entidades em Uma Única Lista
+3 - Criar Relatórios Unificados
+4 - Análise de Dados de Log ou Eventos
+
+#### Union
+
+Com o union, podemos unificar uma ou mais tabelas em uma unica consulta
+
+**Union quando aplicado retorna o dados sem duplicidade (aplica o distinct)**
 
 ```sql 
 
@@ -417,17 +494,32 @@ union
 SELECT DISTINCT BAIRRO FROM TABELA_DE_VENDEDORES
 
 ```
+
 **NO CASO ACIMA ESTAMOS UNINDO DUAS TABELAS ONDE TEM BAIRROS EM COMUM,TRAZENDO SOMENTE UM BAIRRO A + QUE NAO EXISTIA NA TABELA DE CLIENTES**
 
-
-### Union All
+#### Union All
 
 Podemos unir duas ou mais tabelas utilizando UNION ALL.
+
 - Union NÃO aplica o distinct no retorno dos dados, ou seja vai trazer todos os dados correspondente nas tabelas
 
 - temos que ter o mesmo numero de campos (e os tipos devem ser iguais) em ambas consultas
 
 - os nomes das colunas são representados pela primeira consulta
+
+### Funções
+
+Dentro do sql temos funções built in, que nos ajuda em diversas tarefas, como converte textos, numeros e datas.
+
+podemos dividir as funções em 2 grandes grupos:
+
+1 - funções de linha unica: um unico valor entra -> um unico valor sai
+2 - funçoes de multiplas linhas: varios valores entra -> sai um unico valor
+
+**Podemos ter funções alinhadas: lower(left('Lucas',2)**
+
+
+
 
 
 ## Subqueries

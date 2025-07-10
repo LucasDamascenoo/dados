@@ -342,26 +342,7 @@ FROM VENDAS
 
 ```
 
-## Coalese
 
-- Transforma um valor nulo em valor padrão
-- forma mais elegante de trabalharmos com nulos
-
-```sql 
-
-SELECT * FROM STATION_DATA
-WHERE coalesce(precipitation,0) =< 0.5; --usado no where
-
-```
-
-**caso a coluna precipitation tenha dados nulo, setamos o 0 para essas linhas**
-
-```sql 
-
-SELECT report_code, coalesce(precipation,'n/a') FROM STATION_DATA
-
-```
-**caso o campo precipitation seja nulo, setamos o 'n/a' para essas linhas**
 
 ### Joins
 
@@ -516,7 +497,271 @@ podemos dividir as funções em 2 grandes grupos:
 1 - funções de linha unica: um unico valor entra -> um unico valor sai
 2 - funçoes de multiplas linhas: varios valores entra -> sai um unico valor
 
-**Podemos ter funções alinhadas: lower(left('Lucas',2)**
+**Podemos ter funções alinhadas: CAST(sum(valor) AS INT)**
+
+
+#### Funcoes de textos
+
+Podemos dividir funcoes de textos em algumas subcategorias, como manpulacao, calculos e extracoes.
+
+**1. Manipulacao:**
+
+- Concat: combina varias srings em uma única
+
+```SQL:
+
+
+SELECT CONCAT ("Lucas",' ', 'Damasceno') -- LUCAS DAMASCENO
+
+
+```
+
+- Upper e Lower : transforma nossas strings em minúsculo ou minúsculo
+
+SELECT LOWER(CONCAT ('LUCAS',' ' , 'DAMASCENO')) 
+
+
+```SQL:
+
+
+SELECT LOWER(CONCAT("LUCAS",' ', 'DAMASCENO')) -- lucas damasceno
+
+
+```
+
+- Trim: remove espaços em branco do inicio ou do fim de uma string
+
+```SQL:
+
+
+SELECT TRIM('    LUCAS DAMASCENO') -- LUCAS DAMASCENO  
+
+```
+**use o where first_name != trim(first_name) para identificar os casos que possuem espaço**
+
+```SQL:
+
+SELECT * FROM USUARIOS
+where first_name != trim(first_name)
+
+```
+
+- replace: utilizado para substituir um determinado valor por outro
+
+**A ORDEM é : string, valor antigo (-), novo valor (/)**
+
+```SQL:
+
+SELECT 
+
+REPLACE('NOME','-',' ') AS NOME_CORRIGIDO,
+CPF
+ FROM USUARIOS
+
+
+```
+
+**2. Calculos:**
+
+- Len: retorna a quantidade de caracteries tem uma determinada strings
+
+```SQL:
+
+SELECT LEN('LUCAS DAMASCENO DE OLIVEIRA') --27 --Espacos são considerados um caracter
+
+
+```
+
+**3. extracoes**
+
+
+- Left and Right: Extrai(LEFT DO INICIO DA STRING, RIGHT PELO FIM DA STRING) caracteries de uma strings de acordo com o tamanho passado
+
+```SQL:
+
+SELECT LEFT('08229030000176',8) AS RAIZ_CNPJ -- 08229030
+
+-- EXTRAIMOS APENAS OS 8 PRIMEIROS CARACTERIES DO CNPJ
+```
+
+ 
+
+- Substrings: extrai caracteries de acordo com a posição que foi indicada
+
+**ORDEM : (valor/string , posicição inicial,tamanho(quantos carac)**
+
+ ```SQL:
+
+SELECT substring('42567209875',1,8) -- 42567209
+
+-- passamos qual o inicio de que queremos extrair (1) e ate quantos caracteries (8)
+```
+
+#### Funcoes de numeros
+
+- Round: utilizado para arredondar valores para x casas decimais.
+
+ ```SQL:
+
+SELECT ROUND(VALOR_MENSALIDADE,2) --
+
+
+```
+ 
+- Abs: Transforma numeros negativos em positivos(atraves do numero absoluto)
+
+ ```SQL:
+
+SELECT ABS(-190.50) -- 190.50
+
+
+```
+
+#### Funcoes de Data e Tempo
+
+- Extracao em partes: Sao Funcoes Que Aajudam a Extrair Determinada Parte de uma data
+
+
+ ```SQL:
+
+SELECT YEAR('2025-07-07') -- 2025
+
+SELECT MONTH('2025-07-07') -- 07
+
+SELECT DAY('2025-07-07') -- 07
+
+SELECT DATEPART(QUARTER,'2025-08-08') -- 3(TERCEIRO QUARTO)(RETORNA ESSAS INFOS EM INTEIROS)
+
+SELECT DATENAME(MONTH,GETDATE())-- JULHO (RETORNA ESSAS INFOS EM TEXTOS, CORRESPONDENTE AO MES)
+
+SELECT DATETRUNC(MINUTES, '2024-08-08 12:02:00') -- trunca a data , por exemplo, caso a data tenha minutos, usando o datetrunc, tudo que tem minutos eh 00
+
+SELECT EOMONTH('2025-02-10')  -- 28 - RETORNA O ULTIMO DIA DO MES QUE FOI PASSADO
+
+```
+
+- Formatacao e Casting de datas
+
+**1. Cast:**
+
+**ORDEM: valor,tipo de dado**
+
+Usamos o cast quando queremos mudar o tipo de dado para outros, exemplo: string para data, ou datetime para date
+
+ ```SQL:
+
+SELECT CAST(GETDATE() AS DATE) AS data_sem_horas -- 2025-07-10
+
+-- o tipo de dados saiu de um datetime(data e hora) para date
+```
+
+**2. convert**
+
+**ORDEM: tipo de dados,valor,estilo**
+
+```SQL:
+
+SELECT CAST(GETDATE() AS DATE) AS data_sem_horas -- 2025-07-10
+
+-- o tipo de dados saiu de um datetime(data e hora) para date
+```
+
+Tambem permite conversoes de tipos de dados,mas permite aplicar um estilo (style) — um número que define o formato de exibição da data.
+
+
+**3. format**
+
+nos permite alterar tipos de dados 'localmente' como tipo de moeda, formato de datas.
+
+
+```SQL:
+
+SELECT FORMAT(GETDATE(), 'dd/MM/yyyy') AS Data_Formatada -- 10/07/2025;
+
+
+```
+**outro exemplo**
+```SQL:
+
+SELECT FORMAT(1234.5, 'C', 'pt-BR') -- R$ 1.234,50
+
+```
+
+**4. Calculos:**
+
+-DateADD: Adiciona ou subtrai uma quantidade de tempo a uma data, como dias, meses ou anos.
+
+**ORDEM: parte_data, quantidade, data_base**
+
+```SQL:
+
+SELECT DATEADD(DAY,30,GETDATE()) -- VAMOS ADICIONAR 30 DIAS COM BASE NA DATA ATUAL
+SELECT
+DATEADD(DAY,-180,GETDATE()) DATE_180, -- VAMOS DIMINUIR 180 DIAS COM BASE NA DATA ATUAL
+
+
+```
+
+- DateDIFF: Retorna a diferença entre duas datas em uma unidade de tempo especificada (ano, mês, dia, hora etc).
+
+
+```SQL:
+
+
+SELECT *,
+DATEDIFF(YEAR,GETDATE(),BirthDate) as anos
+ FROM [Sales].[Employees]
+
+```
+
+
+**5. validacao:**
+
+- Isdate(): verificar se o dado passado eh uma data ou nao,
+
+```SQL:
+
+SELECT 
+ISDATE('2025') checkName, -- 1 == true
+ISDATE('123') checdate -- 0 == false
+
+```
+
+
+#### Funcoes para tratar Nulos
+
+**1. isNull:**
+
+troca valores nulos por um valor especifico
+
+**ORDEM: valor, valor_que_vamos_mudar**
+
+```SQL:
+
+SELECT ISNULL(NOME,'n/a') -- Aqui defininos um valor padrao
+SELECT ISNULL(NOME,FULLNAME) -- aqui usamos outra coluna para ser o valor padrao
+
+```
+
+
+**2. Coalese:**
+
+ Transforma um valor nulo em valor padrão,forma mais elegante de trabalharmos com nulos
+
+```sql 
+
+SELECT * FROM STATION_DATA
+WHERE coalesce(precipitation,0) =< 0.5; --usado no where
+
+--caso a coluna precipitation tenha dados nulo, setamos o 0 para essas linhas
+```
+
+```sql 
+
+SELECT report_code, coalesce(precipation,'n/a') FROM STATION_DATA
+
+--caso o campo precipitation seja nulo, setamos o 'n/a' para essas linhas
+```
 
 
 

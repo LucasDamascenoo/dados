@@ -13,7 +13,7 @@ Normalizamos tabela para que os dados sejam lidos e gravados de forma mais clara
 - Chave Primaria: Chave primaria identificar um registro unico em uma tabela (ID,CPF,NSU)
 - Chave Estrangeira: Chave primaria de uma tabela que foi adicionado em outra tabela.
 
-## Consultas (Querys)
+### Consultas (Querys)
 
 O objetivo das consultas é retornar dados de uma determinada tabela/view, para isso usamos o SELECT.
 
@@ -311,47 +311,14 @@ from needful_things.orders
 where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
 ```
 
-## Is Null e Is Not Null
-
-- Is null é usado para verificar quando uma coluna tem valores nulos(vai retornar somente null)
-
-```sql 
-SELECT DISTINCT produtos FROM tb_products
-where produtos is null;
-```
-
-- IS Not null é usadado para verificar quando não queremos trazer nulos
-```sql 
-SELECT DISTINCT produtos FROM tb_products
-where produtos is not null;
-```
-## Case
-
-Case é usado para criar uma estrutura lógico (como um if em outras linguagens)
-
-```sql 
-
-SELECT
-PRODUTO,
-PRECO,
-CASE 
-WHEN VALOR >50 AND VALOR <= 100 VALOR THEN 'BARATO'
-WHEN VALOR > 100 THEN 'CARO'
-ELSE VALOR END AS 'CATEGORIA_PRECO'
-FROM VENDAS
-
-```
-
-
-
-### Joins
+## Joins
 
 Jois sao usados para combinar dados de uma ou mais tabelas atraves de campos em comum (como uma chave primaria ou estrangeira )
 
 ![joins](/dados/img/joins.png)
 
 
-#### Porque usar Joins?
+### Porque usar Joins?
 
 1. combinar dados de tabelas diferentes em uma unica visao : inner - left
 2. enriquecimento de dados 'buscar dados extras de outras tabelas' :  left
@@ -386,7 +353,7 @@ Anti Joins são usamos para nos ajudar a identificar/trazer os dados que não te
 
 **Exemplo de uso: Você tem uma tabela de Clientes e uma tabela de Pedidos. Você quer encontrar todos os clientes que nunca fizeram nenhum pedido.**
 
-#### Left Anti Join
+### Left Anti Join
  
  semelhante ao Left Join, iremos usar a sintax com a diferença que pegamos os registros nulos da tabela de comparação (right)
 
@@ -406,7 +373,7 @@ WHERE
 
 ```
 
-#### Right Anti Join
+### Right Anti Join
 
 O Right Anti Join (também conhecido como RIGHT EXCLUDING JOIN) retorna todas as linhas da tabela da direita que não têm uma correspondência na tabela da esquerda, com base na condição de junção.
 
@@ -488,7 +455,7 @@ Podemos unir duas ou mais tabelas utilizando UNION ALL.
 
 - os nomes das colunas são representados pela primeira consulta
 
-### Funções
+## Funções
 
 Dentro do sql temos funções built in, que nos ajuda em diversas tarefas, como converte textos, numeros e datas.
 
@@ -500,7 +467,7 @@ podemos dividir as funções em 2 grandes grupos:
 **Podemos ter funções alinhadas: CAST(sum(valor) AS INT)**
 
 
-#### Funcoes de textos
+### Funcoes de textos
 
 Podemos dividir funcoes de textos em algumas subcategorias, como manpulacao, calculos e extracoes.
 
@@ -597,7 +564,7 @@ SELECT substring('42567209875',1,8) -- 42567209
 -- passamos qual o inicio de que queremos extrair (1) e ate quantos caracteries (8)
 ```
 
-#### Funcoes de numeros
+### Funcoes de numeros
 
 - Round: utilizado para arredondar valores para x casas decimais.
 
@@ -617,7 +584,7 @@ SELECT ABS(-190.50) -- 190.50
 
 ```
 
-#### Funcoes de Data e Tempo
+### Funcoes de Data e Tempo
 
 - Extracao em partes: Sao Funcoes Que Aajudam a Extrair Determinada Parte de uma data
 
@@ -728,7 +695,7 @@ ISDATE('123') checdate -- 0 == false
 ```
 
 
-#### Funcoes para tratar Nulos
+### Funcoes para tratar Nulos
 
 **1. isNull:**
 
@@ -740,6 +707,16 @@ troca valores nulos por um valor especifico
 
 SELECT ISNULL(NOME,'n/a') -- Aqui defininos um valor padrao
 SELECT ISNULL(NOME,FULLNAME) -- aqui usamos outra coluna para ser o valor padrao
+
+```
+
+**Podemos usar o ISNULL para quando fazemos join com chaves que possuem valores nulos**
+
+```SQL:
+SELECT A.nome, B.cidade
+FROM TabelaA A
+LEFT JOIN TabelaB B
+  ON ISNULL(A.id_cliente, -1) = ISNULL(B.id_cliente, -1)
 
 ```
 
@@ -764,6 +741,54 @@ SELECT report_code, coalesce(precipation,'n/a') FROM STATION_DATA
 ```
 
 
+**3. Is null e Is not null:**
+
+- Is null é usado para verificar quando uma coluna tem valores nulos(vai retornar somente null)
+
+```sql 
+SELECT DISTINCT produtos FROM tb_products
+where produtos is null;
+```
+
+- IS Not null é usado para quando não queremos trazer nulos
+
+```sql 
+SELECT DISTINCT produtos FROM tb_products
+where produtos is not null;
+```
+
+
+## Case
+
+Case é usado para criar uma estrutura lógico (como um if em outras linguagens), podemos utilizar essa logica para criar campos novos em nossas tabelas de acordo com certa regras.
+
+```sql 
+
+SELECT
+PRODUTO,
+PRECO,
+CASE                                 
+WHEN VALOR >50 AND VALOR <= 100 VALOR THEN 'BARATO'
+WHEN VALOR > 100 THEN 'CARO'
+ELSE VALOR END AS 'CATEGORIA_PRECO'
+FROM VENDAS
+
+```
+
+**MODO ABREVIADO PARA EVITAR REPETICAO DA COLUNA(apenas para uma coluna)**                                                                                                        
+```sql                                                                              
+SELECT
+PRODUTO,
+PRECO,
+CASE CIDADE
+WHEN  'ALEMANHA' THEN 'DE' 
+WHEN  'INDIA' THEN 'IN'  
+WHEN  'BRASIL' THEN 'BR'  
+WHEN  'ALEMANHA' THEN 'DE'  
+ELSE 'N/A' END AS 'CIDADE'
+FROM VENDAS
+
+```
 
 
 

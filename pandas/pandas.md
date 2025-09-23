@@ -697,9 +697,100 @@ df.isna().sum()
 
 
 
-
-
 ## pivot() e pivot_table()
+
+
+Pivot e Pivot table sao a famosa 'tabela dinamica' do Excel.
+
+### Pivot()
+
+- Transforma linhas em colunas quando temos dados organizados e sem duplicatas.
+
+```Python:
+
+df = pd.DataFrame({
+    "cliente": ["A", "A", "B", "B"],
+    "seguradora": ["X", "Y", "X", "Z"],
+    "limite": [100, 200, 150, 300]
+})
+
+
+tabela = pd.pivot(index='cliente',columns='seguradora',values='limite')
+
+
+---------------------------------------
+seguradora      X      Y      Z
+cliente                         
+A            100.0  200.0    NaN
+B            150.0    NaN  300.0
+
+
+```
+### pivot_table()
+
+- Um pouco mais poderoso que o pivot(), pois ja permite trabalhar com dados duplicados, e fazer funcoes de agregacoes (sum,mean)
+
+
+```Python:
+
+df = pd.DataFrame({
+    "cliente": ["A","A","B","B","C","C"],
+    "mes": ["Jan","Fev","Jan","Fev","Jan","Fev"],
+    "valor": [100,150,200,250,300,100]
+})
+
+
+tabela2 = pd.pivot_table(
+index='cliente',        #Cada Cliente vira uma linha
+columns='seguradora',           #cada seguradora vira uma coluna
+values='limite',                  #valores da celula   
+aggfunc = 'sum',                  #soma os valores de acordo com o cliente
+fill_value= 0 ,                    #onde nao tem dado,vira 0 
+margins=True  ,                   #define que havera total
+margins_name = 'total',
+).reset_index()
+
+
+---------------------------------------
+mes      Fev   Jan   All
+cliente                    
+A        150   100   250
+B        250   200   450
+C        100   300   400
+All      500   600  1100
+
+```
+
+**Podemos fazer multi level index**
+
+```Python:
+
+df = pd.DataFrame({
+    "cliente": ["A", "A", "B", "B"],
+    "seguradora": ["X", "Y", "X", "Z"],
+    "limite": [100, 200, 150, 300]
+})
+
+
+tabela2 = pd.pivot_table(
+index=['cliente','mes']      #Cada Cliente vira uma linha
+columns='seguradora',  #cada seguradora vira uma coluna
+values='limite',         #valores da celula   
+aggfunc = 'sum',         #soma os valores de acordo com o cliente
+fill_value= 0            #onde nao tem dado,vira 0 
+).reset_index()
+
+
+---------------------------------------
+produto        X    Y
+cliente ano           
+A       2023  100    0
+        2024  250    0
+B       2023    0  150
+        2024    0  300
+
+```
+
 
 ## melt()
 

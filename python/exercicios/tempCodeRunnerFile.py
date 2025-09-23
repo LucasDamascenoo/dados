@@ -1,2 +1,5 @@
+x = 10
+print(id(x))  # mostra o endereço de memória
 
-# usuario = int(input('Escolha 0 para pedra, e 1 para papel: '))
+x += 1        # cria um NOVO objeto com valor 11
+print(id(x))

@@ -264,52 +264,7 @@ from needful_things.orders
 where products not like '%uva' -- vai retornar tudo que não tenha "uva" 
 ```
 
-## Funções de agregações
 
-Temos funções de agregações que realizam um determinado calculo no SQL.
-
-- AVG(Média)
-
-```sql 
-select 
-avg(salary) as média_salario
-from needful_things.orders
-where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
-```
-
-- SUM(Soma)
-
-```sql 
-select 
-sum(salary) as soma_salario
-from needful_things.orders
-where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
-```
-- COUNT(Conta o conjunto)
-
-```sql 
-select 
-count(funcionarios) as qtd_funcionarios
-from needful_things.orders
-where cidade in ('sp','bh','rj')  -- vai retornar dados apenas se todas as condições forem verdade
-```
-- MIN (Encontra o menor valor)
-
-```sql 
-select 
-min(age) as menor_idade
-from needful_things.orders
-where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
-```
-
-- MAX (Encontra o valor Máximo)
-
-```sql 
-select 
-max(age) as maior_idade
-from needful_things.orders
-where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
-```
 
 ## Joins
 
@@ -790,6 +745,106 @@ FROM VENDAS
 
 ```
 
+**Criando um tabela dinamica com o CASE**
+
+``` sql
+
+ SELECT
+    Categoria,
+    SUM(CASE WHEN Mês = 'Jan' THEN Valor ELSE 0 END) AS Jan,
+    SUM(CASE WHEN Mês = 'Fev' THEN Valor ELSE 0 END) AS Fev
+FROM Vendas
+GROUP BY Categoria;
+```
+
+## Funções de agregações
+
+Temos funções de agregações que realizam um determinado calculo no SQL.
+
+
+**1. AVG(Média):**
+
+```sql 
+select 
+avg(salary) as média_salario
+from needful_things.orders
+where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
+```
+
+**2. SUM(salary):** 
+
+```sql 
+select 
+sum(salary) as soma_salario
+from needful_things.orders
+where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
+```
+
+**3. COUNT(Conta o conjunto):** 
+
+```sql 
+select 
+count(funcionarios) as qtd_funcionarios
+from needful_things.orders
+where cidade in ('sp','bh','rj')  -- vai retornar dados apenas se todas as condições forem verdade
+```
+
+**4. MIN (Encontra o menor valor):** 
+
+```sql 
+select 
+min(age) as menor_idade
+from needful_things.orders
+where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
+```
+
+**5. MAX (Encontra o valor Máximo):** 
+
+```sql 
+select 
+max(age) as maior_idade
+from needful_things.orders
+where products in ('pa','ra','dh') and values >= 1000 -- vai retornar dados apenas se todas as condições forem verdade
+```
+
+## Window Functions
+
+Sao funcoes que permitem fazer calculos(agregacoes) sem perder o detalhes das informacoes das linhas;
+
+
+**1. Group By Vs Windowns Functions**
+
+Quando usamos o groupby ele 'Enxugar' as informacoes em uma unica linha, e com isso podemos perder os detalhes da agrupacao.
+
+![alt text](../img/groupby.png)
+
+Quando utilizamos Windowns functions podemos ter mais detalhes, vai continuar somando o total de vendas, mas as linhas serao 'abertas' por cada transacao que aquela soma representa
+
+![alt text](../img/windownsFunctions.png)
+
+
+**1.1 Qual usar?**
+
+- Utileza Group By quando formos fazer agregacoes simples (Analises simples)
+- Ja as Window Functions quando formos fazer agregacoes mas queremos mais detalhes (Analises mais avancadas)
+
+**2. Sintax**
+
+![alt text](../img/sintax_wf.png)
+
+1 - Function Expression: eh o argumento que passo para a funcao(pode ser algo vazio, uma coluna, um numero, multiplos argumentos e ate uma condicao logica)
+2 - Over: Eh o que 'diz' pro SQL que a funcao sera usada em uma janela
+3 - Partition by : cria partições (subconjuntos) por categoria
+4 - Order By : Orderna os dados da janela (menor ou maior)
+5 - Flame clause: 
+
+
+
+
+## Pivot e Unpivot:
+
+Pesquisar e anotar sobre:
+
 
 
 ## Subqueries
@@ -831,6 +886,8 @@ SELECT * FROM TABELA_DE_CLIENTES
 WHERE BAIRRO IN (SELECT DISTINCT BAIRRO FROM TABELA_DE_VENDEDORES)
 
 ```
+
+
 
 ## Manipulações
 

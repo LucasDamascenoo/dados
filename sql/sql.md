@@ -887,6 +887,33 @@ WHERE BAIRRO IN (SELECT DISTINCT BAIRRO FROM TABELA_DE_VENDEDORES)
 
 ```
 
+## CTE
+
+CTE (Common Table Expression) são pequenas partes de querys definidas com WITH, que criam tabelas temporárias dentro da própria consulta, usadas para organizar, reutilizar e deixar o SQL mais legível.
+
+
+```sql 
+
+WITH vendas_cliente as (
+
+  SELECT 
+    clientes,
+    sum(valor) as total_cliente
+    from vendas
+    group by clientes
+)
+
+SELECT AVG(total_cliente) AS media_entre_clientes
+FROM vendas_por_cliente;
+
+```
+
+**Benefícios das CTEs**
+
+1. clareza : Divide a query em blocos lógicos e nomeados
+2. Reuso : Pode usar a mesma CTE várias vezes dentro da mesma query
+3. Modularidade : Facilita testes e manutenção
+4. Substitui subqueries aninhadas : Evita aquele caos de SELECT dentro de SELECT
 
 
 ## Manipulações

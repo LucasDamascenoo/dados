@@ -31,3 +31,34 @@ TASK3 > estudar no yt
 TASK4> realizar exercicios
 TASK5> fazer a prova
 
+### Parametros 'necessarios' para criar uma dag
+
+
+ ```Python:
+
+ @dag(start_date=datetime(2025,04,11),
+      schedule='@daily',
+      catchup = False,
+      description = 'essa dag executa um etl referente a vendas',
+      tags = ['vendas'],
+      default_args = {'retries':1},
+      dagrun_timeout=timedelta(minutes:20),
+      max_consecutive_failed_dag_runs=2)
+
+```
+- **start_date:** data de inicio do agendamento da dag
+- **schedule:** define a frequencia que a dag vai ser executada
+- **catchup:**  Se True, executa execuções pendentes desde o start_date. Se False, só executa a partir do momento atual.
+- **description:** Texto descritivo da DAG, aparece na UI do Airflow.
+- **tags:** Lista de rótulos usados para categorizar a DAG na interface.
+- **default_args:** Dicionário com configurações padrão aplicadas às tasks da DAG
+- **dagrun_timeout:**  Tempo máximo que uma execução da DAG pode durar antes de ser interrompida.
+- **max_consecutive_failed_dag_runs:** Número máximo de execuções consecutivas com falha antes de o Airflow pausar a DAG automaticamente
+
+
+
+
+
+
+
+

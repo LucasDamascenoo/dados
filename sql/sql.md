@@ -270,7 +270,7 @@ where products not like '%uva' -- vai retornar tudo que não tenha "uva"
 
 Jois sao usados para combinar dados de uma ou mais tabelas atraves de campos em comum (como uma chave primaria ou estrangeira )
 
-![joins](/dados/img/joins.png)
+![joins](..\img\joins.png)
 
 
 ### Porque usar Joins?
@@ -837,6 +837,92 @@ Quando utilizamos Windowns functions podemos ter mais detalhes, vai continuar so
 3 - Partition by : cria partições (subconjuntos) por categoria
 4 - Order By : Orderna os dados da janela (menor ou maior)
 5 - Flame clause: 
+
+
+### Funcoes de agregacoes
+
+**Sintax**
+
+```sql 
+
+AVG (sales) over (partition by ProductId order by Sales)
+      |                |                    |
+    Expressao         Partition by         order by
+    eh obrigatorio       opcional          opcional    
+    (somente numeros)  
+
+```
+
+
+**1 . Count**
+
+- nos ajuda a entender quantas linhas possue um 'subconjunto' de dados
+
+
+```sql 
+
+WITH sales_product as (
+
+select
+p.Product,
+o.Sales
+ from [Sales].[Orders] as o
+ inner join   [Sales].[Products] as p
+ on o.ProductID = p.ProductID
+
+)
+
+select *, count(Sales) over (Partition by Product) as qtd_sales
+from sales_product
+
+
+```
+
+![alt text](../img/example_count.png)
+
+
+**use case: identificando duplicidades em nossas tabelas**
+
+```sql 
+
+select * from (
+	SELECT 
+	OrderID,
+	COUNT(*) OVER (PARTITION BY OrderID) AS checkpk
+	FROM 
+	[Sales].[OrdersArchive]
+
+) as t 
+where checkpk >1
+
+
+
+```
+
+**2 . Sum**
+
+- retorna a soma de todos os valores de uma determinada 'janela'
+
+
+```sql 
+WITH sales_product as (
+
+select
+p.Product,
+o.Sales
+ from [Sales].[Orders] as o
+ inner join   [Sales].[Products] as p
+ on o.ProductID = p.ProductID
+
+)
+
+select *, sum(Sales) over (Partition by Product) as sum_sales
+from sales_product
+
+```
+
+![alt text](../img/example_sum.png)
+
 
 
 

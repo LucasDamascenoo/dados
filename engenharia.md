@@ -1,6 +1,6 @@
 # o que é a engenharia de dados?
 
-
+Engenharia de Dados é a área responsável por projetar, construir, manter e escalar sistemas que transformam dados brutos (raw data) em dados confiáveis, limpos, organizados e prontos para uso pelas áreas de negócio, analistas, cientistas de dados e sistemas de machine learning.
 
 # Pipelines de Dados
 
@@ -26,7 +26,122 @@ Pipelines de dados é um meio de mover dados de uma origem para um destino, como
 - **Pipelines de Dados**: Fluxo contínuo e automatizado de dados de uma origem para um destino, passando por várias etapas de processamento que podem incluir ETL, validação, enriquecimento, e análise em tempo real.
 
 
+# Processamento
+
+Comumente temos 2 tipos de processamentos de dados: Batch e stream.
+
+## Batch
+
+Processamento de dados em lotes (chunks), executado em intervalos definidos.
+
+- processa uma grande volume de dados de uma unica vez
+- roda em horarios fixos
+- usado para agregacoes, consolidacoes e carga de dados em massa
+
+**Exemplo: Todo dia às 02:00, processar todas as vendas do dia anterior e atualizar o faturamento.**
+
+
+## Stream
+
+Processamento contínuo, onde os dados são tratados à medida que chegam.
+
+- fluxo continuo dos dados
+- baixa latencia
+- analises em tempo real
+
+**Exemplo: Cada transação de cartão é analisada no momento em que acontece.**
+
+
+
 # Arquiteturas
+
+## DW
+
+Um Data Warehouse(dw) é um repositório centralizado, estruturado e orientado a análises, onde os dados já chegam tratados, padronizados e modelados.
+
+- aceita somente dados estruturados
+- Dados modelados (Star Schema, Snowflake)
+- caro para escalar
+- ACID (Atomicidade, Consistência, Isolamento, Durabilidade)
+- Normalmente usa ETL (transforma antes de carregar)
+
+
+## Data lake
+
+Um Data Lake é um repositório que armazena dados em estado bruto (raw), permitindo guardar qualquer tipo de dado, no formato original.
+
+- Dados estruturado, semi e nao estruturados (videos, imagens,jsons)
+- Schema-on-read
+- Baixo custo de armazenamento
+- Nao utiliza ACID (Atomicidade, Consistência, Isolamento, Durabilidade)
+- Nao utilizado para bi e relatorios
+
+## Data lakehouse
+
+O 'melhor' dos 2 mundos (dw e datalake), combina a flexibilidade e baixo custo do Data Lake com as garantias, performance e governança do Data Warehouse.
+
+Problema clássico:
+
+- Data Lake → flexível, mas sem governança
+
+- Data Warehouse → governado, mas caro e rígido
+
+Lakehouse resolve isso trazendo para o Data Lake:
+
+- ACID transactions
+
+- Schema enforcement
+
+- Time travel
+
+- Performance para BI
+
+🧠 Principais características
+
+- Dados ficam em object storage (S3, ADLS, GCS)
+- Usa formatos de tabela abertos
+- Suporta batch e streaming
+- Atende BI, Analytics e ML no mesmo lugar
+
+🧱 Componentes de uma arquitetura Lakehouse
+
+1️⃣ Storage
+
+- Object Storage (S3 / ADLS / GCS)
+
+2️⃣ Table Format
+
+- Delta Lake
+
+- Apache Iceberg
+
+- Apache Hudi
+
+3️⃣ Processamento
+
+- Spark / PySpark
+
+- Spark SQL
+
+- Flink (em alguns casos)
+
+4️⃣ Consumo
+
+- BI (Power BI, Tableau)
+
+- Notebooks
+
+- APIs / ML
+
+🟡 Camadas (Bronze / Silver / Gold)
+
+- Bronze : Dados brutos
+- Silver: Dados tratados e validados
+- Gold:  Dados agregados e analíticos
+
+
+
+
 
 # Coleta de Dados
 

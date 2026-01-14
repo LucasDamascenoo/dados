@@ -59,35 +59,72 @@ spark = SparkSession.builder \
 
 ```
 
-# Lendo Arquivos
+# Lendo - Escrevendo Arquivos
 
 
 ## csv
 
+- lendo em csv
+
 ```{python}
 
-dados_csv = spark.read.csv('caminho.csv',header=True,inferSchema =True, sep=';')
+path = 'caminho'
+dados_csv = spark.read.csv(path,header=True,inferSchema =True, sep=';')
 
 ```
 
 **parametros**:
 
-1 - caminho onde esta localizado o csv
+1 - path : onde esta localizado o csv
 2 - header = true : indica que queremos que o df tenha o cabeçalho
 3 - inferSchema = true : indica que spark vai identificar os tipos de cada coluna
 4 - sep : especificação do separador (, ou ;)
 
-## excel
+**Utilizar o InferSchema, pode causar atribuicoes de tipos de dados erradas e fazer com que o df demore a ser lido...**
+
+- escrevendo em csv
+
+```{python}:
+(
+df.write
+.format('csv')
+.mode('append)
+.options(header=True,sep=';')
+.save(output_path)
+)
+```
+
+
+## json
+
+json eh uma colecao de objetos que trazem informacoes atraves de chave:valor, bastante utilizado em apis
+
+
+
+```{python}:
+(
+df.write
+.format('json')
+.mode('overwrite')
+.options(header=True,sep=';')
+.save(output_path)
+)
+```
+
+
+
 
 
 
 # Visualizando dados
 
-- spark.show() - 
+- spark.show() :
+- spark.display() :
 - spark.limit(5) : mostra os 5 primeiros registros
 - spark.printSchema : mostra os metadados do df (int,strint,date)
 
 
 
 # Renomeando Colunas
+
 

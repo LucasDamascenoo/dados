@@ -19,6 +19,54 @@ Apache Airflow é uma plataforma de código aberto para criar, agendar e monitor
 - **Operadores**: Operadores sao modelos que define como as tasks serao executada,se eu quiser rodar um python utilizamos o operator PythonOperator: Executa uma função Python.
 
 
+## Configuracao
+
+Para podermos rodar o airflow em uma maquina wind, precisamos do docker-compose.
+
+1. criar um pasta (onde vamos rodar o projeto)
+2. colocar os arquivos (.env docker-compose.yaml)
+
+**3. docker-compose up -d :** 
+
+- Cria e inicia os containers definidos no docker-compose.yaml
+obs: por utilizarmos o -d, o processo roda em background (nao trava o terminal)
+
+**4. docker compose ps :**
+- Mostra o status dos serviços daquele compose
+
+**5. docker compose stop :**
+- para os containers mas nao remove nada(para mas nao exclui nada)
+
+📌 Quando usar?
+➡️ Quando você quer parar o Airflow por enquanto e voltar depois rápido.
+
+Depois, para ligar de novo:
+
+ ```Python:
+docker compose start
+```
+
+**6. docker compose down :**
+
+- Para os containers
+- Remove os containers da stack
+- Remove rede criada pelo compose
+
+📌 Quando usar?
+➡️ “quero desligar e limpar os containers”
+
+
+**7. docker compose down -v :**
+- Tudo do down
+- MAIS: remove os volumes (dados persistidos)
+
+📌 Quando usar?
+➡️ “quero resetar tudo e começar do zero”
+
+** 8. docker compose restart: **
+
+-Reinicia todos os serviços
+
 ## Dags
 
 - o conceito de uma dag e o conjunto de varias tarefas (tasks) que eh quebrar um processo em diversas etapas que no fim resulta em uma acao final.

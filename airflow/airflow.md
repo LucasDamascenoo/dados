@@ -94,14 +94,43 @@ TASK5> fazer a prova
       max_consecutive_failed_dag_runs=2)
 
 ```
-- **start_date:** data de inicio do agendamento da dag
+- **dag_id:** identificador unico da dag no cluster
+- **description:** descricao da dag, aparece na UI do Airflow.
 - **schedule:** define a frequencia que a dag vai ser executada
+- **start_date:** define data e hora de inicio do agendamento da dag
+- **end_date:** define data e hora que a dag nao deve ser mais executada
 - **catchup:**  Se True, executa execuções pendentes desde o start_date. Se False, só executa a partir do momento atual.
-- **description:** Texto descritivo da DAG, aparece na UI do Airflow.
+- **default_view:** visualizacao padrao da interface do Airflow para a dag, por exemplo ' grid'
+- **max_active_runs:** maximo de execucoes ativas da dag permitida
+- **max_active_tasks:** limita o numero maximo de tasks ativas
 - **tags:** Lista de rótulos usados para categorizar a DAG na interface.
 - **default_args:** Dicionário com configurações padrão aplicadas às tasks da DAG
 - **dagrun_timeout:**  Tempo máximo que uma execução da DAG pode durar antes de ser interrompida.
 - **max_consecutive_failed_dag_runs:** Número máximo de execuções consecutivas com falha antes de o Airflow pausar a DAG automaticamente
+
+### Parametros 'necessarios' para as tasks (default_args)
+
+![default_Args](..\img\default_args.png)
+
+
+
+### Trigger Rules
+
+- all_success : tarefa eh executada se tdas as tarefas anteriores foram concluidas com sucesso: **padrao**
+
+
+
+
+![trigger rules](../img/trigger_rules.png)
+
+### Operadores
+
+principais operadores que utilizamos no Airflow
+
+![operadores](../img/operadores.png)
+
+
+
 
 
 

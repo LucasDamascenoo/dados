@@ -4,9 +4,10 @@ Repositorio criado para acompanhar meus estudos na área de dados afim de aprimo
 
 
 [SQL](./sql/sql.md)
-[Spark](./spark/spark.md)
 [Python](./python/python.md)
 [Pandas](./pandas/pandas.md)
+[Spark](./spark/spark.md)
+[DataBricks](./databricks/databricks.md)
 [Projetos](./)
 
  
